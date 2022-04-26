@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<odoo>
+    
+    <record model="ir.ui.view" id="view_account_move_inherit_custom_probc">
+        <field name="name">account.move.inherit.form.custom</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="////form/sheet/notebook/page[last()]" position="after">
+                <page string="Approval Details">
+                    <group>
+                        <field name="custom_approval_type" invisible='1'/>
+                        <field name="custom_is_reason_refuse" invisible='1'/>
+                        <field name="custom_is_second_level_approval" invisible='1'/>
+                        <field name="custom_is_third_level_approval" invisible='1'/>
+                        <field name="is_custom_approval" invisible='1'/>
+                        <field name="is_custom_refuse" invisible='1'/>
+                        <field name="is_custom_send_mail" invisible='1'/>
+                        <field name="custom_second_approval_notify_id" invisible='1'/>
+                        <field name="custom_third_approval_notify_id" invisible='1'/>
+                        <field name="custom_is_refuse_ribbon" invisible='1'/>
+                        <field name="custom_reason_refuse" attrs="{'invisible':[('custom_is_reason_refuse', '=', False)]}"/>
+                        <field name="custom_refused_date" attrs="{'invisible':[('custom_is_reason_refuse', '=', False)]}"/>
+                        <field name="custom_refuse_id" attrs="{'invisible':[('custom_is_reason_refuse', '=', False)]}"/>
+                    </group>
+                    <group>
+                        <field name="custom_second_level_approval_date" attrs="{'invisible':[('custom_approval_type', 'not in', ('second_level_approval','both'))]}"/>
+                        <field name="custom_is_second_level_approver_id" attrs="{'invisible':[('custom_approval_type', 'not in', ('second_level_approval','both'))]}"/>
+                    </group>
+                    <group>
+                        <field name="custom_third_level_approval_date" attrs="{'invisible':[('custom_approval_type', 'not in', 'both')]}"/>
+                        <field name="custom_is_third_level_approver_id" attrs="{'invisible':[('custom_approval_type', 'not in', 'both')]}"/>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//form//sheet//div" position="after">
+                <widget
+                    name="web_ribbon"
+                    text="Waiting 2nd"
+                    attrs="{'invisible': ['|',('custom_approval_type', 'not in', ('second_level_approval','both')),('state','not in','draft')]}"/>
+                <widget name="web_ribbon" 
+                    text="Waiting 3rd"
+                    attrs="{'invisible': ['|','|',('custom_approval_type', 'not in', 'both'),('custom_is_second_level_approval','=', False),('state','not in','draft')]}"/>
+                <widget name="web_ribbon" 
+                    text="Waiting Post"
+                    attrs="{'invisible': ['|',('is_custom_approval','=',False),('state','not in','draft')]}"/>
+                <widget name="web_ribbon" 
+                    text="Refused"
+                    attrs="{'invisible': ['|',('custom_approval_type', 'not in', ['second_level_approval','both']),('custom_is_refuse_ribbon','=',False)]}"/>
+            </xpath>
+            <xpath expr="//button[@name='action_post']" position="before">
+                <button 
+                    string="Notify Second Approver" 
+                    name="%(action_account_move_second_approval_wizard)d"  
+                    type="action" 
+                    class="oe_highlight"
+                    attrs="{'invisible': ['|',('custom_approval_type', 'not in', ('second_level_approval','both')),('is_custom_send_mail','=', True)]}"
+                    />
+                <button 
+                    string="Second Approval" 
+                    name="%(action_account_move_third_approval_wizard)d" 
+                    type="action"
+                    class="oe_highlight"
+                    attrs="{'invisible': ['|','|',('custom_approval_type', 'not in', ('second_level_approval','both')),('custom_is_second_level_approval','=', True),('is_custom_approval','=', True)]}"
+                    />
+                <button 
+                    string="Third Approval" 
+                    name="action_custom_third_level_approval" 
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible': ['|','|',('custom_approval_type', 'not in', 'both'),('custom_is_second_level_approval','=', False),('is_custom_approval','=', True)]}"
+                    />
+                <button 
+                    string="Refuse"
+                    name="%(action_account_move_refuse_wizard)d"  
+                    type="action" 
+                    attrs="{'invisible': ['|',('custom_approval_type', 'not in', ['second_level_approval','both']),('is_custom_approval','=', True)]}"
+                    />
+            </xpath>
+            <xpath expr="//button[@name='action_post']" position="attributes">
+                  <attribute name="attrs">{'invisible': ['|',('is_custom_approval', '=', False),('state', '!=', 'draft')]}</attribute>
+            </xpath>
+        </field>
+    </record>
+    
+</odoo>
+
+

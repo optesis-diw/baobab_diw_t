@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    microcred_profile module for odoo, Profile for Microcred
+        #    Copyright (C) 2016 SYLEAM Info Services ([http://www.syleam.fr/])
+        #              Chris Tribbeck [chris.tribbeck@syleam.fr]
+        #
+        #    This file is a part of microcred_profile
+        #
+        #    microcred_profile is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    microcred_profile is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+    
+<data noupdate="1">
+    <record id="email_template_approve_1" model="mail.template">
+            <field name="name">Purchase order approval 1</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="email_from">${(object.user_id.email_formatted or user.email_formatted) |safe}</field>
+            <field name="subject">${object.company_id.name} Order (Ref ${object.name or 'n/a' })</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Dear ${object.partner_id.name}
+        % if object.partner_id.parent_id:
+            (${object.partner_id.parent_id.name})
+        % endif
+        <br/><br/>
+        The Purchase Order <strong>${object.name}</strong> from provider  <strong>${object.partner_id.name}</strong> and with amount ${object.currency_amount} is pending budgetary validation. Click the button at the top of this e-mail to view the order.
+        
+        % if object.partner_ref:
+            <strong>(${object.partner_ref})</strong>
+        % endif 
+        is expected for 
+        % if object.date_planned:
+            <strong>${format_date(object.date_planned)}</strong>.
+        % else:
+            <strong>undefined</strong>.
+        % endif
+        
+    </p>
+</div></field>
+            <field name="report_template" ref="purchase.action_report_purchase_order"/>
+            <field name="report_name">PO_${(object.name or '').replace('/','_')}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    
+        <record id="email_template_approve_2" model="mail.template">
+            <field name="name">Purchase order approval 2</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="email_from">${(object.user_id.email_formatted or user.email_formatted) |safe}</field>
+            <field name="subject">${object.company_id.name} Order (Ref ${object.name or 'n/a' })</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Dear ${object.partner_id.name}
+        % if object.partner_id.parent_id:
+            (${object.partner_id.parent_id.name})
+        % endif
+        <br/><br/>
+        The Purchase Order <strong>${object.name}</strong> from provider  <strong>${object.partner_id.name}</strong> and with amount ${object.currency_amount} is pending validation. Click the button at the top of this e-mail to view the order.
+        
+        % if object.partner_ref:
+            <strong>(${object.partner_ref})</strong>
+        % endif 
+        is expected for 
+        % if object.date_planned:
+            <strong>${format_date(object.date_planned)}</strong>.
+        % else:
+            <strong>undefined</strong>.
+        % endif
+        
+    </p>
+</div></field>
+            <field name="report_template" ref="purchase.action_report_purchase_order"/>
+            <field name="report_name">PO_${(object.name or '').replace('/','_')}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+        <record id="email_template_approve_3" model="mail.template">
+            <field name="name">Purchase order approval 311</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="email_from">${(object.user_id.email_formatted or user.email_formatted) |safe}</field>
+            <field name="subject">${object.company_id.name} Order (Ref ${object.name or 'n/a' })</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px;">
+    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        Dear ${object.partner_id.name}
+        % if object.partner_id.parent_id:
+            (${object.partner_id.parent_id.name})
+        % endif
+        <br/><br/>
+        The Purchase Order <strong>${object.name}</strong> from provider  <strong>${object.partner_id.name}</strong> and with amount ${object.currency_amount} has been validated. Click the button at the top of this e-mail to view the order.
+        
+        % if object.partner_ref:
+            <strong>(${object.partner_ref})</strong>
+        % endif 
+        is expected for 
+        % if object.date_planned:
+            <strong>${format_date(object.date_planned)}</strong>.
+        % else:
+            <strong>undefined</strong>.
+        % endif
+        
+    </p>
+</div></field>
+            <field name="report_template" ref="purchase.action_report_purchase_order"/>
+            <field name="report_name">PO_${(object.name or '').replace('/','_')}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+       
+
+
+        <record id="email_template_invoice_request_mgt_validation" model="mail.template">
+            <field name="name">Invoice approval request</field>
+            <field name="subject">Payment validation request ${object.number} (${object.reference})</field>
+            <field name="email_to">${object.state_emails}</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+                <p>Hello,</p>
+                <p>The invoice ${object.reference} from provider ${object.partner_id.name} and with amount ${object.currency_amount} is pending validation. Click the button at the top of this e-mail to authorise the payment of this invoice.</p>
+                ]]></field>
+        </record>
+
+        <record id="email_template_invoice_request_dept_validation" model="mail.template">
+            <field name="name">Invoice request validation</field>
+            <field name="subject">Invoice validation request ${object.number} (${object.reference})</field>
+            <field name="email_to">${object.state_emails}</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+                <p<Hello,</p>
+                <p>The invoice ${object.reference} from provider ${object.partner_id.name} and with amount ${object.currency_amount} has been recorded. Click the button at the top of this e-mail to confirm the product or service has been delivered and authorize the payment.</p>
+                ]]></field>
+        </record>
+
+        <record id="email_template_invoice_approved" model="mail.template">
+            <field name="name">Invoice to pay</field>
+            <field name="subject">Invoice approval (Ref: ${object.name or 'n/a'})</field>
+            <field name="email_to">${object.state_emails}</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+                <p>Hello,</p>
+                <p>The invoice ${object.number} (${object.reference}) from provider ${object.partner_id.name} and with amount ${object.currency_amount} has been validated and you can proceed with the payment. Click the button at the top of this e-mail to view the invoice.</p>
+                ]]></field>
+        </record>
+
+        <record id="email_template_invoice_paid" model="mail.template">
+            <field name="name">Invoice paid</field>
+            <field name="subject">Invoice payment (Ref: ${object.name or 'n/a'})</field>
+            <field name="email_to">${object.state_emails}</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+                <p>Hello,</p>
+                <p>The invoice ${object.number} (${object.reference}) from provider ${object.partner_id.name} and with amount ${object.currency_amount} has been paid. Click the button at the top of this e-mail to view the invoice.</p>
+                ]]></field>
+        </record>
+
+ <template id="message_notification_email">
+<div>
+<div t-if="has_button_access" itemscope="itemscope" itemtype="http://schema.org/EmailMessage">
+    <div itemprop="potentialAction" itemscope="itemscope" itemtype="http://schema.org/ViewAction">
+        <link itemprop="target" t-att-href="button_access['url']"/>
+        <link itemprop="url" t-att-href="button_access['url']"/>
+        <meta itemprop="name" t-att-content="button_access['title']"/>
+    </div>
+</div>
+<div t-if="has_button_access or len(actions) &gt; 0 or not is_discussion"
+        summary="o_mail_notification" style="padding: 0px; width:600px;">
+    <table cellspacing="0" cellpadding="0" border="0" style="width: 600px; margin-top: 5px;">
+    <tbody><tr>
+    <td valign="center">
+        <a t-if="has_button_access"
+                t-att-href="button_access['url']"
+                style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px">
+            <t t-esc="button_access['title']"/>
+        </a>
+        <t t-if="actions">
+            <t t-foreach="actions" t-as="action">
+                |
+                <a t-att-href="action['url']" style="color: #875A7B; text-decoration:none !important;">
+                    <t t-esc="action['title']"/>
+                </a>
+            </t>
+        </t>
+    </td>
+    <td valign="center" align="right">
+        <img t-att-src="'/logo.png?company=%s' % (company.id or 0)" style="padding: 0px; margin: 0px; height: auto; max-width: 200px; max-height: 36px;" t-att-alt="'%s' % company.name"/>
+    </td>
+    </tr><tr>
+    <td colspan="2" style="text-align:center;">
+        <hr width="100%"
+            style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:4px 0 12px 0;"/>
+        <p t-if="subtype.internal" style="background-color: #f2dede; padding: 5px; margin-bottom: 16px;">
+            <strong>Internal communication</strong>: Replying will post an internal note. Followers won't receive any email notification.
+        </p>
+    </td>
+    </tr></tbody>
+    </table>
+</div>
+<div t-raw="message.body"/>
+<ul t-if="tracking_values">
+    <t t-foreach="tracking_values" t-as="tracking">
+        <li><t t-esc="tracking[0]"/>: <t t-esc="tracking[1]"/> -&gt; <t t-esc="tracking[2]"/></li>
+    </t>
+</ul>
+<div t-if="signature" t-raw="signature" style="font-size: 13px;"/>
+<p style="color: #555555; margin-top:32px;">
+    Sent
+    <span t-if="company.name">
+    by
+    <a t-if="website_url" t-att-href="website_url" style="text-decoration:none; color: #875A7B;">
+        <span t-esc="company.name"/>
+    </a>
+    <span t-if="not website_url" t-esc="company.name"/>
+    </span>
+    using
+    <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=email" style="text-decoration:none; color: #875A7B;">Odoo</a>.
+</p>
+</div>
+        </template>
+
+    </data>
+</odoo>

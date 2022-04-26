@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    advanced_budget module for odoo, Advanced budgets
+        #    Copyright (C) 2016 Syleam ([http://www.syleam.fr/])
+        #              Chris Tribbeck [chris.tribbeck@syleam.fr]
+        #
+        #    This file is a part of advanced_budget
+        #
+        #    advanced_budget is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    advanced_budget is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+        <record id="view_budget_element_search" model="ir.ui.view">
+            <field name="name">budget.element.search</field>
+            <field name="model">budget.element</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Budget elements">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="user_id"/>
+                    <field name="partner_id"/>
+                    <filter string="Draft" domain="[('state', '=', 'draft')]" name="draft"/>
+                    <filter string="Open" domain="[('state', '=', 'open')]" name="open"/>
+                    <filter string="Done" domain="[('state', '=', 'done')]" name="done"/>
+                    <filter string="Cancelled" domain="[('state', '=', 'cancel')]" name="cancel"/>
+                    <separator/>
+                    <filter string="Periodic" domain="[('type', '=', 'periodic')]" name="periodic"/>
+                    <filter string="Project" domain="[('type', '=', 'project')]" name="project"/>
+                    <!--filter string="Budget Line" domain="[('type', '=', 'budget_line')]" name="budget_line"/>
+                    <filter string="Budget Detail" domain="[('type', '=', 'budget_detail')]" name="budget_detail"/-->
+                    <filter string="Department" domain="[('type', '=', 'department')]" name="department"/>
+                    <filter string="Partner" domain="[('type', '=', 'partner')]" name="partner"/>
+                    <filter string="Company" name="company_id" groups="base.group_system"/>
+                    <group expand="0" string="Group By">
+                        <filter name="grp_state" string="State" domain="[]" context="{'group_by':'state'}"/>
+                        <filter name="grp_type" string="Type" domain="[]" context="{'group_by':'type_id'}"/>
+                        <filter name="grp_user" string="User" domain="[]" context="{'group_by':'user_id'}"/>
+                        <filter name="grp_partner" string="Partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter name="grp_department" string="Department" domain="[]" context="{'group_by':'department_id'}"/>
+                        <filter name="grp_company" string="Company" domain="[]" context="{'group_by':'company_id'}" groups="base.group_system"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_budget_element_tree">
+            <field name="name">budget.element.tree</field>
+            <field name="model">budget.element</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <field name="name"/>
+                <field name="type"/>
+                <field name="user_id"/>
+                <field name="amount_calculated"/>
+                <field name="amount_invoiced"/>
+                <field name="state"/>
+                <field name="company_id" groups="base.group_system"/>
+                <field name="budget_detail_ids" invisible="1" />
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_budget_element_form">
+            <field name="name">budget.element.form</field>
+            <field name="model">budget.element</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Budget element" colspan="4" col="4">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="list_purchases" type="object" class="oe_stat_button" icon="fa-truck">
+                            <field name="purchase_count" widget="statinfo" string="Purchases" help="The number of purchase orders linked to this budget element, and its children."/>
+                        </button>
+                        <button name="list_invoices" type="object" class="oe_stat_button" icon="fa-briefcase">
+                            <field name="invoice_count" widget="statinfo" string="Invoices" help="The number of invoices linked to this budget element, and its children."/>
+                        </button>
+                    </div>
+                    <header attrs="{'invisible': [('type','not in', ('periodic', 'project'))]}">
+                        <button string="Proposition" states="draft" class="oe_highlight" type="object" name="action_propose_budget"/>
+                        <button string="Return to draft" states="proposition" type="object" name="action_redraft_budget"/>
+                        <button string="Open" states="proposition" class="oe_highlight" type="object" name="action_open_budget"/>
+                        <button string="Close" states="open" class="oe_highlight" type="object" name="action_close_budget"/>
+                        <button string="Cancel" states="draft,open" type="object" name="action_cancel_budget"/>
+                        <button string="Uncancel" states="cancel" type="object" name="action_uncancel_budget"/>
+                        <button string="Return to draft" states="cancel,close" type="object" name="action_redraft_budget"/>
+                        <field name="state" widget="statusbar" nolabel="1" statusbar_visible="draft,proposition,open,done"/>
+                    </header>
+                    <group colspan="4">
+                        <label for="name" string="Name" class="oe_edit_only"/><newline/>
+                        <div class="oe_title oe_left" style="width: 72%;" colspan="2">
+                            <h1>
+                                <field name="name" placeholder="Budget element's name" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                            </h1>
+                        </div>
+                        <group colspan="4" col="4" name="main_group">
+                            <group colspan="2" col="2">
+                                <field name="code" placeholder="Budget element's code" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                                <field name="user_id" placeholder="The budget's manager" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                            </group>
+                            <group colspan="2" col="2">
+                                <field name="type_id" attrs="{'readonly': [('state', 'not in', ['draft'])]}" domain="[('type', 'in', ('periodic', 'project', 'department', 'partner'))]" widget="selection"/>
+                                <label for="date_start" string="Period" attrs="{'invisible': [('type', '!=', 'periodic')]}"/>
+                                <div attrs="{'invisible': [('type', '!=', 'periodic')]}" name="date_div">
+                                    <field name="date_start" nolabel="1" class="oe_inline" attrs="{'required': [('type', '=', 'periodic')], 'readonly': [('state', 'not in', ('draft'))]}"/> to
+                                    <field name="date_end" nolabel="1" class="oe_inline" attrs="{'required': [('type', '=', 'periodic')], 'readonly': [('state', 'not in', ('draft'))]}" />
+                                </div>
+                                <field name="project_id" attrs="{'readonly': [('state', 'not in', ('draft'))], 'invisible': [('type', '!=', 'project')], 'required': [('type', '=', 'project')]}"/>
+                                <field name="department_id" attrs="{'readonly': [('state', 'not in', ('draft'))], 'invisible': [('type', '!=', 'department')], 'required': [('type', '=', 'department')]}"/>
+                                <field name="partner_id" attrs="{'readonly': [('state', 'not in', ('draft'))], 'invisible': [('type', '!=', 'partner')], 'required': [('type', '=', 'partner')]}"/>
+                                <field name="product_id" attrs="{'readonly': [('state', 'not in', ('draft'))], 'invisible': [('type', '!=', 'budget_detail')]}"/>
+                                <field name="type" invisible="1" />
+                                <field name="company_id" options="{'no_create': True}" groups="base.group_system" attrs="{'required': [('type', '!=', 'partner')], 'readonly': [('state', '!=', 'draft')]}"/>
+                            </group>
+                            <field name="user_can_modify" invisible="1" />
+                        </group>
+                        <group colspan="4" attrs="{'invisible': [('user_can_modify', '=', False)]}">
+                            <separator string="Budget information" colspan="4"/>
+                            <group colspan="4" attrs="{'invisible': [('type', 'not in', ('periodic', 'project'))]}" col="6">
+                                <field name="amount_fixed" attrs="{'readonly': [('state', 'not in', ['draft'])]}" />
+                                <field name="amount_calculated"/>
+                                <field name="amount_initial" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                <newline/>
+                                <field name="amount_engaged" attrs="{'invisible': [('was_opened','=', False)]}"/>
+                                <field name="amount_invoiced" attrs="{'invisible': [('was_opened','=', False)]}"/>
+                                <field name="was_opened" invisible="1" />
+                            </group>
+                            <notebook colspan="4">
+                                <page string="Budget lines" attrs="{'invisible': [('type', 'not in', ('periodic', 'project'))]}" name="lines">
+                                    <div>
+                                        Use this tab to define budget lines for this budget. Extra costs may be added from other budgets - these appear in the "Sub-budgets" tab.
+                                    </div>
+                                    <field name="budget_line_ids" attrs="{'readonly': [('state', 'not in', ['draft'])]}"
+                                        context="{'default_type_id': %(budget_element_type_line)d,}">
+                                        <tree string="Budget lines" editable="bottom">
+                                            <field name="name" attrs="{'readonly': [('is_readonly','!=', False)]}"/>
+                                            <field name="amount_fixed" sum="Amount planned" attrs="{'readonly': [('is_readonly','!=', False)]}"/>
+                                            <button string="Modify" icon="fa-pencil" type="action" name="%(action_wizard_modify_amount)d"
+                                                attrs="{'invisible': ['|', ('is_readonly', '=', True), ('state', 'in', ('draft', 'cancel'))]}"/>
+                                            <field name="amount_initial" sum="Initial amount"/>
+                                            <button string="Add detail" icon="fa-bars" type="action" name="%(action_wizard_add_budget_details)d" attrs="{'invisible': ['|', ('is_readonly','!=', False), ('state', '!=', 'draft')]}"/>
+                                            <field name="amount_engaged" sum="Amount engaged" />
+                                            <field name="amount_invoiced" sum="Amount engaged" />
+                                            <field name="text_distribution"/>
+                                            <button string="Specific distribution" icon="fa-tasks" type="action"
+                                                name="%(action_wizard_add_budget_distribution)d" attrs="{'invisible': [('is_readonly','!=', False)]}"/>
+                                            <button string="Create purchase" icon="fa-cart-plus" type="object"
+                                                name="create_purchase" attrs="{'invisible': ['|', ('is_readonly','!=', False), ('state', '!=', 'open')]}"/>
+                                            <button string="List purchases" icon="fa-truck" type="object"
+                                                name="list_purchases" attrs="{'invisible': ['|', ('is_readonly','!=', False), ('state', '!=', 'open')]}"/>
+                                            <button string="Create supplier invoice" icon="fa-money" type="object"
+                                                name="create_invoice" attrs="{'invisible': ['|', ('is_readonly','!=', False), ('state', '!=', 'open')]}"/>
+                                            <button string="List invoices" icon="fa-briefcase" type="object"
+                                                name="list_invoices" attrs="{'invisible': ['|', ('is_readonly','!=', False), ('state', '!=', 'open')]}"/>
+                                            <field name="type_id" invisible="1" />
+                                            <field name="is_readonly" invisible="1" />
+                                            <field name="has_details" invisible="1" />
+                                            <field name="state" invisible="1" />
+                                        </tree>
+                                        <form>
+                                            <group colspan="4">
+                                                <div class="oe_title oe_left" style="width: 72%;">
+                                                    <h1>
+                                                        <field name="name"/>
+                                                    </h1>
+                                                </div>
+                                                <group colspan="4">
+                                                    <separator string="Details" colspan="4"/>
+                                                    <field name="budget_detail_ids" nolabel="1" colspan="2"
+                                                        context="{'default_type_id': %(budget_element_type_detail)d,}">
+                                                        <tree string="Budget Details" editable="bottom">
+                                                            <field name="product_id"/>
+                                                            <field name="name"/>
+                                                            <field name="amount_fixed" sum="Amount planned"/>
+                                                            <field name="amount_engaged" sum="Amount engaged" />
+                                                            <field name="amount_invoiced" sum="Amount engaged" />
+                                                            <field name="text_distribution"/>
+                                                            <button string="Specific distribution" icon="fa-tasks" type="action"
+                                                                name="%(action_wizard_add_budget_distribution)d"/>
+                                                            <button string="Create purchase" icon="fa-cart-plus" type="object"
+                                                                name="create_purchase"/>
+                                                            <button string="Create supplier invoice" icon="fa-money" type="object"
+                                                                name="create_invoice"/>
+                                                            <field name="type_id" invisible="1" />
+                                                            <field name="state" invisible="1" />
+                                                        </tree>
+                                                    </field>
+                                                </group>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </page>
+                                <page string="Budget details" attrs="{'invisible': [('type', '!=', 'budget_line')]}" name="details">
+                                    <field name="budget_detail_ids" attrs="{'readonly': [('state', 'not in', ['draft'])]}"
+                                        context="{'default_type_id': %(budget_element_type_detail)d,}">
+                                        <tree string="Budget Details" editable="bottom">
+                                            <field name="product_id"/>
+                                            <field name="name"/>
+                                            <field name="amount_fixed" sum="Amount planned"/>
+                                            <button string="Modify" icon="fa-pencil" type="action" name="%(action_wizard_modify_amount)d" attrs="{'invisible': [('state', 'in', ('draft', 'cancel'))]}"/>
+                                            <field name="amount_engaged" sum="Amount engaged" />
+                                            <field name="amount_invoiced" sum="Amount engaged" />
+                                            <field name="text_distribution"/>
+                                            <button string="Specific distribution" icon="fa-tasks" type="action" name="%(action_wizard_add_budget_distribution)d"/>
+                                            <field name="type_id" invisible="1" />
+                                            <field name="state" invisible="1" />
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Cost distribution" attrs="{'invisible': [('type', 'not in', ('periodic', 'project', 'budget_line', 'budget_detail'))]}" name="costs">
+                                    <div>
+                                        Use this tab to define to which departments and/or partners your costs are to be affected (unless specified per line / detail).
+                                    </div>
+                                    <field name="distribution_cost_ids" attrs="{'readonly': [('state', 'not in', ['draft'])]}">
+                                        <tree editable="bottom">
+                                            <field name="child_id" domain="[('type', 'in', ('department', 'partner'))]" options="{'no_create': True}" string="Partner or Department" required="1" />
+                                            <field name="amount_fixed"/>
+                                            <field name="percentage"/>
+                                            <field name="amount_calculated" sum="Amount planned"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Budget distribution" attrs="{'invisible': [('type', 'not in', ('periodic', 'project', 'budget_line', 'budget_detail'))]}" name="budgets">
+                                    <div>
+                                        Use this tab to define to which budgets your costs are to be affected (if any).
+                                    </div>
+                                    <field name="distribution_budget_ids" attrs="{'readonly': [('state', 'not in', ['draft'])]}">
+                                        <tree editable="bottom">
+                                            <field name="child_id" domain="[('type', 'in', ('periodic', 'project'))]" options="{'no_create': True}" string="Budget" required="1" />
+                                            <field name="amount_fixed"/>
+                                            <field name="percentage"/>
+                                            <field name="amount_calculated" sum="Amount planned"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Sub-budgets" attrs="{'invisible': [('type', 'not in', ('periodic', 'project', 'budget_line', 'budget_detail'))]}" name="sub-budgets">
+                                    <div>
+                                        This tab lists the budgets affected to this budget (if any).
+                                    </div>
+                                    <field name="affected_budget_ids" readonly="1" >
+                                        <tree>
+                                            <field name="parent_id" domain="[('type', 'in', ('periodic', 'project'))]" options="{'no_create': True}" string="Budget"/>
+                                            <field name="amount_fixed"/>
+                                            <field name="percentage"/>
+                                            <field name="amount_calculated" sum="Amount planned"/>
+                                            <field name="amount_engaged" sum="Amount engaged"/>
+                                            <field name="amount_invoiced" sum="Amount invoiced"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Members" attrs="{'invisible': [('type', 'not in', ('periodic', 'project'))]}" name="members">
+                                    <div>
+                                        Use this tab to specify which users have what accesses to this budget.
+                                    </div>
+                                    <field name="member_ids">
+                                        <tree editable="bottom">
+                                            <field name="user_id" options="{'no_create': true}"/>
+                                            <field name="access_level"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
+                    </group>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_budget_element" model="ir.actions.act_window">
+            <field name="name">Budgets</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">budget.element</field>
+            <field name="view_mode">tree,form</field>
+
+            <field name="context">{'search_default_periodic': 1, 'search_default_project': 1}</field>
+            <field name="domain">[('type', 'not in', ('budget_line', 'budget_detail'))]</field>
+            <field name="search_view_id" ref="view_budget_element_search"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to define a new budget element.
+                    </p><p>
+                    You must define budget elements in order to manage your budgets.
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_budget_element_view_form">
+            <field name="act_window_id" ref="action_budget_element"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_budget_element_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_budget_element_view_tree">
+            <field name="act_window_id" ref="action_budget_element"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_budget_element_tree"/>
+        </record>
+
+        <record id="action_budget_department" model="ir.actions.act_window">
+            <field name="name">Budget departments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">budget.element</field>
+            <field name="view_mode">tree,form</field>
+
+            <field name="context" eval="{'default_type_id': ref('advanced_budget.budget_element_type_department'), 'search_default_department': 1}"></field>
+            <field name="domain">[('type', 'not in', ('budget_line', 'budget_detail'))]</field>
+            <field name="search_view_id" ref="view_budget_element_search"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to define a new budget department.
+                    </p><p>
+                    You must define budget departments in order to affect your budgets to departments.
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_budget_department_view_form">
+            <field name="act_window_id" ref="action_budget_department"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_budget_element_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_budget_department_view_tree">
+            <field name="act_window_id" ref="action_budget_department"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_budget_element_tree"/>
+        </record>
+
+        <record id="action_budget_partner" model="ir.actions.act_window">
+            <field name="name">Budget partners</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">budget.element</field>
+            <field name="view_mode">tree,form</field>
+
+            <field name="context" eval="{'default_type_id': ref('advanced_budget.budget_element_type_partner'), 'search_default_partner': 1}"></field>
+            <field name="domain">[('type', 'not in', ('budget_line', 'budget_detail'))]</field>
+            <field name="search_view_id" ref="view_budget_element_search"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to define a new budget partner.
+                    </p><p>
+                    You must define budget partners in order to affect your budgets to partners.
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_budget_partner_view_form">
+            <field name="act_window_id" ref="action_budget_partner"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_budget_element_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_budget_partner_view_tree">
+            <field name="act_window_id" ref="action_budget_partner"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_budget_element_tree"/>
+        </record>
+
+        <menuitem id="account.menu_finance_reports"
+            sequence="10"/>
+
+        <menuitem id="menu_budget_main"
+            sequence="5"
+            parent="account.menu_finance"
+            name="Budgets"/>
+      
+
+        <menuitem id="menu_budget_element"
+            parent="menu_budget_main"
+            action="action_budget_element"
+            sequence="10"/>
+
+        <menuitem id="menu_budget_config"
+            sequence="5"
+            parent="account.menu_finance_configuration"
+            name="Advanced budgets"/>
+
+        <menuitem id="menu_budget_department"
+            parent="menu_budget_config"
+            action="action_budget_department"
+            sequence="20"/>
+    
+        
+
+        <menuitem id="menu_budget_partner"
+            parent="menu_budget_config"
+            action="action_budget_partner"
+            sequence="30"/>
+    
+    <!-- Menu budget advanced -->
+    
+    <!--  <menuitem id="menu_budget_main_adv"
+            sequence="6"
+            parent="account.menu_finance"
+            name="Configuration"/>
+    <menuitem id="menu_budget_department_main"
+            parent="menu_budget_main_adv"
+            action="action_budget_department"
+            sequence="7"/>
+    <menuitem id="menu_budget_partner_adv"
+            parent="menu_budget_main_adv"
+            action="action_budget_partner"
+            sequence="8"/>
+     <menuitem id="menu_account_axis_adv"
+            parent="menu_budget_main_adv"
+            action="microcred_profile.action_account_axis"
+            sequence="9"/>
+      <menuitem id="menu_budget_line_type_adv"
+            parent="menu_budget_main_adv"
+            action="microcred_profile.action_budget_line_type"
+            sequence="10"/> -->
+    
+
+        <record id="view_budget_line_search" model="ir.ui.view">
+            <field name="name">budget.element.search</field>
+            <field name="model">budget.element</field>
+            <field name="type">search</field>
+            <field name="priority" eval="4"/>
+            <field name="arch" type="xml">
+                <search string="Budget lines">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="user_id"/>
+                    <group expand="0" string="Group By">
+                        <filter name="grp_state" string="State" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_budget_line_tree">
+            <field name="name">budget.line.tree</field>
+            <field name="model">budget.element</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="4"/>
+            <field name="arch" type="xml">
+                <tree create="false">
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="amount_calculated"/>
+                    <field name="amount_engaged"/>
+                    <field name="amount_invoiced"/>
+                    <field name="budget_detail_ids" invisible="1" />
+                    <field name="type" invisible="1" />
+                    <field name="is_readonly" invisible="1" />
+                    <field name="company_id" groups="base.group_system"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_budget_line_pivot">
+            <field name="name">budget.line.pivot</field>
+            <field name="model">budget.element</field>
+            <field name="arch" type="xml">
+                <pivot string="Budget lines">
+                    <field name="budget_id"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="action_budget_line" model="ir.actions.act_window">
+            <field name="name">Budget Lines</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">budget.element</field>
+            <field name="view_mode">tree,form,pivot</field>
+
+            <field name="context">{'tree_view_ref':'advanced_budget.view_budget_line_tree',}</field>
+            <field name="domain">[('type', '=', 'budget_line')]</field>
+            <field name="search_view_id" ref="view_budget_line_search"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    This view lists budget lines.
+                    </p><p>
+                    Budget lines are created from budgets.
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_budget_line_view_form">
+            <field name="act_window_id" ref="action_budget_line"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_budget_element_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_budget_line_view_tree">
+            <field name="act_window_id" ref="action_budget_line"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_budget_line_tree"/>
+        </record>
+    
+        <menuitem id="account.menu_finance"
+                  sequence="1"
+            name="Budget"/>
+        
+        <menuitem id="menu_budget_lines"
+            parent="menu_budget_main"
+            action="action_budget_line"
+            sequence="20"/>
+    
+     <menuitem id="menu_budget_main_adv"
+            sequence="6"
+            parent="account.menu_finance"
+            name="Configuration"/>
+    <menuitem id="menu_budget_department_main"
+            parent="menu_budget_main_adv"
+            action="action_budget_department"
+            sequence="7"/>
+    <menuitem id="menu_budget_partner_adv"
+            parent="menu_budget_main_adv"
+            action="action_budget_partner"
+            sequence="8"/>
+  
+
+    
+    
+
+
+</odoo>

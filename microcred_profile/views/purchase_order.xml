@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="purchase_form_microcred_action" model="ir.actions.act_window">
+            <field name="name">Purchase Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order</field>
+            <field name="view_mode">tree,kanban,form,pivot,graph,calendar</field>
+            <field name="context">{'search_default_todo':1, 'show_purchase': True}</field>
+            <field name="domain">[]</field>
+            <field name="search_view_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a quotation that will be converted into a purchase order. 
+                    </p><p>
+                    Use this menu to search within your purchase orders by
+                    references, vendor, products, etc. For each purchase order,
+                    you can track the related discussion with the vendor, control
+                    the products received and control the vendor bills.
+                </p>
+            </field>
+        </record>
+       <record id="purchase_order_microcred_form" model="ir.ui.view">
+            <field name="name">purchase.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="advanced_budget.purchase_order_advanced_budget_form"/>
+            <field name="priority" eval="90"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='origin']" position="before">
+                   
+                        <label for="all_tag_ids"/>
+                        <div>
+                        
+                        <field name="all_tag_ids" readonly="1" widget="many2many_tags" class="oe_inline"/>
+                        <button string="Set axes" icon="fa-map-o" type="action" name="%(action_wizard_change_account_tags)d" class="oe_inline"/>
+                         </div>
+                   
+                   
+                </xpath>
+              <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="domain">['|',('company_id', '=',False), ('company_id', '=', parent.company_id)]</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='qty_received']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='qty_invoiced']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                
+                
+
+                <xpath expr="//field[@name='budget_element_id']" position="after">
+                    <button string="View Budget element" icon="fa-eye"  type="action" name="%(action_wizard_view_budget_element)d"/>
+                    <field name="all_tag_ids" readonly="1" widget="many2many_tags"/>
+                    <button string="Set axes" icon="fa-map-o" type="action" name="%(action_wizard_change_account_tags)d"/>
+                </xpath>
+                <xpath expr="//button[@name='action_rfq_send'][1]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_rfq_send'][2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_rfq_send'][3]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='print_quotation'][1]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='print_quotation'][2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_cancel']" position="attributes">
+                    
+                    <attribute name="states">draft,to approve,to approve twice,sent,purchase,done</attribute>
+                </xpath>
+                
+               
+                <xpath expr="//field[@name='state']" position="replace">
+                    <field name="microcred_state" widget="statusbar" statusbar_visible="draft,to approve,to approve twice,purchase,done" readonly="1" />
+                </xpath>
+                
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="state" invisible="1" />
+                </xpath>
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="company_currency_id" invisible="1" />
+                    <field name="has_different_currency" invisible="1" />
+                </xpath>
+                <xpath expr="//field[@name='budget_element_id']" position="attributes">
+                    <attribute name="domain">[
+                        ('state', '=', 'open'),
+                        ('type_id', 'in', (%(advanced_budget.budget_element_type_line)d, %(advanced_budget.budget_element_type_detail)d)),
+                        ('budget_detail_ids', '=', False),
+                        ('is_readonly', '=', False), ('user_can_modify', '=', True),
+                       
+                        ('date_start', '&lt;=', parent.date_order),
+                        ('date_end', '&gt;=', parent.date_order)
+                        ]</attribute>
+                      
+                </xpath> 
+                 <xpath expr="//button[@name='button_confirm'][2]" position="attributes">
+                    <attribute name="groups">microcred_profile.group_microcred_department_manager</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='button_confirm'][1]" position="attributes">
+                    <attribute name="groups">microcred_profile.group_microcred_department_manager</attribute>
+                </xpath> 
+                <xpath expr="//button[@name='button_approve']" position="attributes">
+                    <attribute name="groups">microcred_profile.group_microcred_admin,microcred_profile.group_microcred_cost_control,purchase.group_purchase_manager</attribute>
+                    <attribute name="string">Validate budget</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_approve']" position="after">
+                    <button name="button_second_approve" type="object" states='to approve twice' string="Validate Head Finance" class="oe_highlight" groups="microcred_profile.group_microcred_head_finance,microcred_profile.group_microcred_admin"/>
+                </xpath>
+            
+                <xpath expr="//button[@name='button_done']" position="attributes">
+                    <attribute name="groups">microcred_profile.group_microcred_admin,microcred_profile.group_microcred_head_finance,microcred_profile.group_microcred_accountant</attribute>
+                </xpath>
+              
+                <xpath expr="//group[@class='oe_subtotal_footer oe_right']" position="attributes">
+                    <attribute name="col">3</attribute>
+                </xpath>
+                <xpath expr="//field[@name='amount_untaxed']" position="after">
+                    <field name="company_amount_untaxed" nolabel="1" class="oe_subtotal_footer_microcred" attrs="{'invisible': [('has_different_currency','=', False)]}"/>
+                    <newline/>
+                </xpath>
+                <xpath expr="//field[@name='amount_tax']" position="after">
+                    <field name="company_amount_tax" nolabel="1" class="oe_subtotal_footer_microcred" attrs="{'invisible': [('has_different_currency','=', False)]}"/>
+                    <newline/>
+                </xpath>
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="company_amount_total" nolabel="1" class="oe_subtotal_footer_separator_microcred" attrs="{'invisible': [('has_different_currency','=', False)]}"/>
+                    <newline/>
+                </xpath>
+                 
+                
+                
+                
+            </field>
+        </record>
+
+        <record id="purchase_order_microcred_tree" model="ir.ui.view">
+            <field name="name">purchase.order.tree</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+            <field name="priority" eval="90"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_planned']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date_approve']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="partner_ref"/>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="date_order"/>
+                </xpath>
+                
+
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='amount_untaxed']" position="replace">
+                    <field name="amount_untaxed" string="Untaxed Amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="company_amount_untaxed" sum="Total Untaxed amount" string="Total Untaxed" widget="monetary"/>
+                    <field name="company_amount_invoiced" sum="Total" string="Invoiced Amount" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
+                    <field name="company_amount_remaining" sum="Total" string="Remaining Amount" widget="monetary" options="{'currency_field': 'company_currency_id'}"/>
+                </xpath>
+                <xpath expr="//field[@name='amount_total']" position="replace">
+                    <field name="company_amount_total" sum="Total Taxed amount" widget="monetary" string="Total Taxed"/>
+                </xpath>
+                <xpath expr="//field[@name='origin']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+               
+                <xpath expr="//field[@name='state']" position="replace">
+                    <field name="state" invisible="1" />
+                    <field name="microcred_state" widget="badge" decoration-success="microcred_state == 'done'" decoration-info="microcred_state == 'purchase'" decoration-warning="microcred_state == 'to approve' or microcred_state == 'to approve twice'"  decoration-danger="microcred_state == 'cancel'" />
+                    
+                    
+                     
+                    <field name="company_currency_id" invisible="1" />
+                    <field name="currency_id" invisible="1" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_purchase_order_microcred_filter" model="ir.ui.view">
+            <field name="name">request.quotation.microcred.select</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="priority" eval="90"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='draft']" position="attributes">
+                    <attribute name="domain">[('state','=','draft')]</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='approved']" position="before">
+                    <filter name="to_approve_1" string="Budgetary validation" domain="[('state','=', 'to approve')]"/>
+                    <filter name="to_approve_2" string="Head validation" domain="[('state','=', 'to approve twice')]"/>
+                </xpath> <!--
+                <xpath expr="//filter[@name='message_needaction']" position="after">
+                    <separator />
+                    <filter name="late" string="Late" domain="['&amp;', ('date_order', '&lt;', time.strftime('%Y-%m-%d')), ('state', 'not in', ('done','cancel'))]" help="Overdue Purchase Order, maturity date passed"/>
+                </xpath> -->
+                <xpath expr="//group" position="before">
+                    <field name="child_tag_ids"/>
+                    <field name="referenced_budget_ids"/>
+                    <field name="referenced_budget_line_ids"/>
+                    <field name="referenced_budget_detail_ids"/>
+                    <field name="referenced_budget_department_ids"/>
+                </xpath>
+                <xpath expr="//filter[@name='approved']" position="after">
+                    <filter name="ongoing" string="Ongoing" domain="[('state','=','purchase')]"/>
+                    <filter name="done" string="Done" domain="[('state','=','done')]"/>
+                </xpath>
+                <xpath expr="//filter[@name='approved']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath> <!--
+                <xpath expr="//filter[@name='not_invoiced']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='invoiced']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//filter[@name='message_needaction']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath> -->
+                <xpath expr="//group" position="inside">
+                    <filter name="status" string="Status" context="{'group_by':'microcred_state'}"/>
+                    <filter name="currency" string="Currency" context="{'group_by':'currency_id'}"/>
+                    <filter name="owner" string="Owner" context="{'group_by':'create_uid'}"/>
+                </xpath>  
+            </field>
+        </record>
+       <menuitem action="purchase_form_microcred_action" id="menu_purchase_form_action_2" parent="purchase.menu_procurement_management" sequence="6"/>
+      <menuitem action="purchase_form_microcred_action" id="menu_purchase_form_action" parent="account.menu_finance_payables" sequence="6"/>
+        <record id="microcred_profile.menu_purchase_form_action" model="ir.ui.menu"><field name="groups_id" eval="[(4,ref('group_microcred_admin')), (4,ref('group_microcred_cost_control')), (4,ref('group_microcred_head_finance')), (4,ref('group_microcred_accountant')), (4,ref('group_microcred_project_manager')), (4,ref('group_microcred_department_manager'))]"/></record>
+
+</odoo>
+

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    microcred_profile module for odoo, Profile for Microcred
+        #    Copyright (C) 2016 Syleam ([http://www.syleam.fr/])
+        #              Chris Tribbeck [chris.tribbeck@syleam.fr]
+        #
+        #    This file is a part of microcred_profile
+        #
+        #    microcred_profile is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    microcred_profile is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+        <record model="ir.ui.view" id="view_wizard_export_budget_form">
+            <field name="name">wizard.export.budget.form</field>
+            <field name="model">wizard.export.budget</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Export Budgets">
+                    <group colspan="4" col="4" states="data">
+                        <field name="company_ids" colspan="4" widget="many2many_tags" options="{'no_create': True}"/>
+                        <field name="budget_ids" colspan="4" domain="[('type', 'in', ('periodic', 'project')), ('company_id', '=', company_ids)]" invisible="1" />
+                        <field name="date_range"/>
+                        <label for="date_start" string="From" attrs="{'invisible': [('date_range', '!=', 'range')]}" class="oe_inline"/>
+                        <div attrs="{'invisible': [('date_range', '!=', 'range')]}">
+                            <field name="date_start" class="oe_inline"/> to
+                            <field name="date_end" class="oe_inline"/>
+                        </div>
+                        <newline/>
+                       <!-- <field name="view_mode"/> -->
+                        <field name="presentation"/>
+                        <field name="include_generated"/>
+                    </group>
+                    <group colspan="4" col="4" states="export">
+                        <div>
+                            <h2>Export Complete</h2>
+                            <p>Here is/are the exported budget(s): <field name="data" readonly="1" filename="name"/>.</p>
+                        </div>
+                    </group>
+                    <footer>
+                        <button string="Generate Excel" type="object" name="validate_excel" class="oe_highlight" states="data"/>
+                        <button string="Generate CSV" type="object" name="validate_csv" class="oe_highlight" states="data"/>
+                        <button string="Cancel" special="cancel"/>
+                        <field name="state" invisible="1" />
+                        <field name="name" invisible="1" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Export Budget"
+            id="action_wizard_export_budget"
+            res_model="wizard.export.budget"
+            binding_model ="budget.element"
+            binding_views="form"
+            view_mode="form"
+            target="new"
+            />
+    
+
+
+</odoo>

@@ -1,0 +1,318 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_partner_admin,Accès Partenaires - admin,base.model_res_partner,group_microcred_admin,1,1,1,1
+access_sale_order_admin,Accès Commandes de vente - admin,sale.model_sale_order,group_microcred_admin,1,1,1,1
+access_sale_order_line_admin,Accès Lignes de commande de vente - admin,sale.model_sale_order_line,group_microcred_admin,1,1,1,1
+access_purchase_order_admin,Accès Commandes d'achat - admin,purchase.model_purchase_order,group_microcred_admin,1,1,1,1
+access_purchase_order_line_admin,Accès Lignes de commande d'achat - admin,purchase.model_purchase_order_line,group_microcred_admin,1,1,1,1
+access_product_product_admin,Accès Variantes de produits - admin,product.model_product_product,group_microcred_admin,1,1,1,1
+access_product_template_admin,Accès Templates de produits - admin,product.model_product_template,group_microcred_admin,1,1,1,1
+access_account_invoice_admin,Accès Factures - admin,account.model_account_move,group_microcred_admin,1,1,1,1
+access_account_invoice_line_admin,Accès Lignes de facture - admin,account.model_account_move_line,group_microcred_admin,1,1,1,1
+access_account_move_admin,Accès Pièces comptables - admin,account.model_account_move,group_microcred_admin,1,1,1,1
+access_account_move_line_admin,Accès Écritures comptables - admin,account.model_account_move_line,group_microcred_admin,1,1,1,1
+access_account_move_line_distribution_admin,Accès Répartition des écritures - admin,microcred_profile.model_account_move_line_distribution,group_microcred_admin,1,1,1,1
+access_account_account_admin,Accès Comptes comptables - admin,account.model_account_account,group_microcred_admin,1,1,1,1
+access_account_analytic_account_admin,Accès Comptes analytiques - admin,analytic.model_account_analytic_account,group_microcred_admin,1,1,1,1
+access_account_journal_admin,Accès Journaux - admin,account.model_account_journal,group_microcred_admin,1,1,1,1
+access_account_journal_sage_export_admin,Accès Exports SAGE - admin,microcred_profile.model_account_journal_sage_export,group_microcred_admin,1,1,1,1
+access_budget_element_admin,Accès Élements budgétaires - admin,advanced_budget.model_budget_element,group_microcred_admin,1,1,1,1
+access_budget_element_distribution_admin,Accès Répartition des éléments budgétaires - admin,advanced_budget.model_budget_element_distribution,group_microcred_admin,1,1,1,1
+access_budget_element_member_admin,Accès Membres des éléments budgétaires - admin,advanced_budget.model_budget_element_member,group_microcred_admin,1,1,1,1
+access_budget_element_personnel_admin,Accès Personnel des éléments budgétaires - admin,microcred_profile.model_budget_element_personnel,group_microcred_admin,1,1,1,1
+access_budget_element_tag_admin,Accès Étiquettes des éléments budgétaires - admin,microcred_profile.model_budget_element_tag,group_microcred_admin,1,1,1,1
+access_budget_element_type_admin,Accès Types des éléments budgétaires - admin,microcred_profile.model_budget_element_type,group_microcred_admin,1,1,1,1
+access_account_analytic_tag_admin,Accès Étiquettes des écritures - admin,analytic.model_account_analytic_tag,group_microcred_admin,1,1,1,1
+access_budget_reinvoice_batch_admin,Accès Réfacturations - admin,microcred_profile.model_budget_reinvoice_batch,group_microcred_admin,1,1,1,1
+access_hr_employee_admin,Accès Employés - admin,hr.model_hr_employee,group_microcred_admin,1,1,1,1
+access_project_project_admin,Accès Projets - admin,project.model_project_project,group_microcred_admin,1,1,1,1
+access_account_bank_statement_admin,Accès account.bank.statement - admin,account.model_account_bank_statement,group_microcred_admin,1,1,1,1
+access_account_period_admin,Accès Account periods - admin,microcred_profile.model_account_period,group_microcred_admin,1,1,1,1
+access_budget_element_period_admin,Accès Budget element periods - admin,microcred_profile.model_budget_element_period,group_microcred_admin,1,1,1,1
+access_budget_line_type_admin,Accès Budget line types - admin,microcred_profile.model_budget_line_type,group_microcred_admin,1,1,1,1
+access_hr_import_payroll_admin,Accès Pay imports - admin,microcred_profile.model_hr_import_payroll,group_microcred_admin,1,1,1,1
+access_partial_reconcile_admin,Accès lettrage partiel - admin,account.model_account_partial_reconcile,group_microcred_admin,1,1,1,1
+access_budget_element_amortisation_admin,Accès amortisation des éléments budgétaires - Admin,microcred_profile.model_budget_element_amortisation,group_microcred_admin,1,1,1,1
+access_account_axis_admin,Accès axes comptables - Admin,microcred_profile.model_account_axis,group_microcred_admin,1,1,1,1
+access_account_axis_tag_admin,Accès tags des axes comptables - Admin,microcred_profile.model_account_axis_tag,group_microcred_admin,1,1,1,1
+access_account_axis_rule_admin,Accès règles des axes comptables - Admin,microcred_profile.model_account_axis_rule,group_microcred_admin,1,1,1,1
+access_expensify_budget_admin,Accès configuration budget expensify - Admin,model_expensify_budget,group_microcred_admin,1,1,1,1
+access_expensify_import_admin,Accès imports expensify - Admin,model_expensify_import,group_microcred_admin,1,1,1,1
+access_expensify_product_admin,Accès configuration produit expensify - Admin,model_expensify_product,group_microcred_admin,1,1,1,1
+access_bank_statement_admin,Accès relevés bancaires - Admin,model_account_bank_statement,group_microcred_admin,1,1,1,1
+access_bank_statement_line_admin,Accès lignes relevés bancaires - Admin,model_account_bank_statement_line,group_microcred_admin,1,1,1,1
+
+access_res_partner_cost_control,Accès Partenaires - cost_control,base.model_res_partner,group_microcred_cost_control,1,1,1,1
+access_sale_order_cost_control,Accès Commandes de vente - cost_control,sale.model_sale_order,group_microcred_cost_control,1,0,0,0
+access_sale_order_line_cost_control,Accès Lignes de commande de vente - cost_control,sale.model_sale_order_line,group_microcred_cost_control,0,0,0,0
+access_purchase_order_cost_control,Accès Commandes d'achat - cost_control,purchase.model_purchase_order,group_microcred_cost_control,1,1,0,0
+access_purchase_order_line_cost_control,Accès Lignes de commande d'achat - cost_control,purchase.model_purchase_order_line,group_microcred_cost_control,1,1,0,0
+access_product_product_cost_control,Accès Variantes de produits - cost_control,product.model_product_product,group_microcred_cost_control,1,0,0,0
+access_product_template_cost_control,Accès Templates de produits - cost_control,product.model_product_template,group_microcred_cost_control,1,0,0,0
+access_account_invoice_cost_control,Accès Factures - cost_control,account.model_account_move,group_microcred_cost_control,1,1,1,1
+access_account_invoice_line_cost_control,Accès Lignes de facture - cost_control,account.model_account_move_line,group_microcred_cost_control,1,1,1,1
+access_account_move_cost_control,Accès Pièces comptables - cost_control,account.model_account_move,group_microcred_cost_control,1,1,1,1
+access_account_move_line_cost_control,Accès Écritures comptables - cost_control,account.model_account_move_line,group_microcred_cost_control,1,1,1,1
+access_account_move_line_distribution_cost_control,Accès Répartition des écritures - cost_control,microcred_profile.model_account_move_line_distribution,group_microcred_cost_control,1,1,1,1
+access_account_account_cost_control,Accès Comptes comptables - cost_control,account.model_account_account,group_microcred_cost_control,1,1,0,0
+access_account_analytic_account_cost_control,Accès Comptes analytiques - cost_control,analytic.model_account_analytic_account,group_microcred_cost_control,1,1,0,0
+access_account_journal_cost_control,Accès Journaux - cost_control,account.model_account_journal,group_microcred_cost_control,1,1,0,0
+access_account_journal_sage_export_cost_control,Accès Exports SAGE - cost_control,microcred_profile.model_account_journal_sage_export,group_microcred_cost_control,0,0,0,0
+access_budget_element_cost_control,Accès Élements budgétaires - cost_control,advanced_budget.model_budget_element,group_microcred_cost_control,1,1,1,1
+access_budget_element_distribution_cost_control,Accès Répartition des éléments budgétaires - cost_control,advanced_budget.model_budget_element_distribution,group_microcred_cost_control,1,1,1,1
+access_budget_element_member_cost_control,Accès Membres des éléments budgétaires - cost_control,advanced_budget.model_budget_element_member,group_microcred_cost_control,1,1,1,1
+access_budget_element_personnel_cost_control,Accès Personnel des éléments budgétaires - cost_control,microcred_profile.model_budget_element_personnel,group_microcred_cost_control,1,1,1,1
+access_budget_element_tag_cost_control,Accès Étiquettes des éléments budgétaires - cost_control,microcred_profile.model_budget_element_tag,group_microcred_cost_control,1,0,0,0
+access_budget_element_type_cost_control,Accès Types des éléments budgétaires - cost_control,microcred_profile.model_budget_element_type,group_microcred_cost_control,1,0,0,0
+access_account_analytic_tag_cost_control,Accès Étiquettes des écritures - cost_control,analytic.model_account_analytic_tag,group_microcred_cost_control,1,0,0,0
+access_budget_reinvoice_batch_cost_control,Accès Réfacturations - cost_control,microcred_profile.model_budget_reinvoice_batch,group_microcred_cost_control,0,0,0,0
+access_hr_employee_cost_control,Accès Employés - cost_control,hr.model_hr_employee,group_microcred_cost_control,1,0,0,0
+access_project_project_cost_control,Accès Projets - cost_control,project.model_project_project,group_microcred_cost_control,1,1,1,1
+access_account_bank_statement_cost_control,Accès account.bank.statement - cost_control,account.model_account_bank_statement,group_microcred_cost_control,1,0,0,0
+access_account_invoice_tax_cost_control,Accès Taxes de facture - cost_control,account.model_account_tax,group_microcred_cost_control,1,1,1,1
+access_account_period_cost_control,Accès Account periods - cost_control,microcred_profile.model_account_period,group_microcred_cost_control,1,0,0,0
+access_budget_element_period_cost_control,Accès Budget element periods - cost_control,microcred_profile.model_budget_element_period,group_microcred_cost_control,1,1,1,0
+access_budget_line_type_cost_control,Accès Budget line types - cost_control,microcred_profile.model_budget_line_type,group_microcred_cost_control,1,1,1,1
+access_hr_import_payroll_cost_control,Accès Pay imports - cost_control,microcred_profile.model_hr_import_payroll,group_microcred_cost_control,1,0,0,0
+access_partial_reconcile_cost_control,Accès lettrage partiel - cost_control,account.model_account_partial_reconcile,group_microcred_cost_control,1,1,1,1
+access_budget_element_amortisation_cost_control,Accès amortisation des éléments budgétaires - cost_control,microcred_profile.model_budget_element_amortisation,group_microcred_cost_control,1,1,1,1
+access_bank_statement_cost_control,Accès relevés bancaires - cost_control,model_account_bank_statement,group_microcred_cost_control,1,1,1,1
+access_bank_statement_line_cost_control,Accès lignes relevés bancaires - cost_control,model_account_bank_statement_line,group_microcred_cost_control,1,1,1,1
+access_res_partner_head_finance,Accès Partenaires - head_finance,base.model_res_partner,group_microcred_head_finance,1,1,1,1
+access_sale_order_head_finance,Accès Commandes de vente - head_finance,sale.model_sale_order,group_microcred_head_finance,0,0,0,0
+access_sale_order_line_head_finance,Accès Lignes de commande de vente - head_finance,sale.model_sale_order_line,group_microcred_head_finance,0,0,0,0
+access_purchase_order_head_finance,Accès Commandes d'achat - head_finance,purchase.model_purchase_order,group_microcred_head_finance,1,1,0,0
+access_purchase_order_line_head_finance,Accès Lignes de commande d'achat - head_finance,purchase.model_purchase_order_line,group_microcred_head_finance,1,1,0,0
+access_product_product_head_finance,Accès Variantes de produits - head_finance,product.model_product_product,group_microcred_head_finance,1,0,0,0
+access_product_template_head_finance,Accès Templates de produits - head_finance,product.model_product_template,group_microcred_head_finance,1,0,0,0
+access_account_invoice_head_finance,Accès Factures - head_finance,account.model_account_move,group_microcred_head_finance,1,1,1,1
+access_account_invoice_line_head_finance,Accès Lignes de facture - head_finance,account.model_account_move_line,group_microcred_head_finance,1,1,1,1
+access_account_move_head_finance,Accès Pièces comptables - head_finance,account.model_account_move,group_microcred_head_finance,1,1,1,1
+access_account_move_line_head_finance,Accès Écritures comptables - head_finance,account.model_account_move_line,group_microcred_head_finance,1,1,1,1
+access_account_move_line_distribution_head_finance,Accès Répartition des écritures - head_finance,microcred_profile.model_account_move_line_distribution,group_microcred_head_finance,1,1,1,1
+access_account_account_head_finance,Accès Comptes comptables - head_finance,account.model_account_account,group_microcred_head_finance,1,1,1,1
+access_account_analytic_account_head_finance,Accès Comptes analytiques - head_finance,analytic.model_account_analytic_account,group_microcred_head_finance,1,1,1,1
+access_account_journal_head_finance,Accès Journaux - head_finance,account.model_account_journal,group_microcred_head_finance,1,1,1,1
+access_account_journal_sage_export_head_finance,Accès Exports SAGE - head_finance,microcred_profile.model_account_journal_sage_export,group_microcred_head_finance,0,0,0,0
+access_budget_element_head_finance,Accès Élements budgétaires - head_finance,advanced_budget.model_budget_element,group_microcred_head_finance,1,1,1,1
+access_budget_element_distribution_head_finance,Accès Répartition des éléments budgétaires - head_finance,advanced_budget.model_budget_element_distribution,group_microcred_head_finance,1,1,1,1
+access_budget_element_member_head_finance,Accès Membres des éléments budgétaires - head_finance,advanced_budget.model_budget_element_member,group_microcred_head_finance,1,1,1,1
+access_budget_element_personnel_head_finance,Accès Personnel des éléments budgétaires - head_finance,microcred_profile.model_budget_element_personnel,group_microcred_head_finance,1,1,1,1
+access_budget_element_tag_head_finance,Accès Étiquettes des éléments budgétaires - head_finance,microcred_profile.model_budget_element_tag,group_microcred_head_finance,1,0,0,0
+access_budget_element_type_head_finance,Accès Types des éléments budgétaires - head_finance,microcred_profile.model_budget_element_type,group_microcred_head_finance,1,0,0,0
+access_account_analytic_tag_head_finance,Accès Étiquettes des écritures - head_finance,analytic.model_account_analytic_tag,group_microcred_head_finance,1,0,0,0
+access_budget_reinvoice_batch_head_finance,Accès Réfacturations - head_finance,microcred_profile.model_budget_reinvoice_batch,group_microcred_head_finance,0,0,0,0
+access_hr_employee_head_finance,Accès Employés - head_finance,hr.model_hr_employee,group_microcred_head_finance,1,0,0,0
+access_project_project_head_finance,Accès Projets - head_finance,project.model_project_project,group_microcred_head_finance,1,1,1,1
+access_account_bank_statement_head_finance,Accès account.bank.statement - head_finance,account.model_account_bank_statement,group_microcred_head_finance,1,0,0,0
+access_account_invoice_tax_head_finance,Accès Taxes de facture - head_finance,account.model_account_tax,group_microcred_head_finance,1,1,1,1
+access_account_period_head_finance,Accès Account periods - head_finance,microcred_profile.model_account_period,group_microcred_head_finance,1,0,0,0
+access_budget_element_period_head_finance,Accès Budget element periods - head_finance,microcred_profile.model_budget_element_period,group_microcred_head_finance,1,1,1,0
+access_budget_line_type_head_finance,Accès Budget line types - head_finance,microcred_profile.model_budget_line_type,group_microcred_head_finance,1,0,0,0
+access_hr_import_payroll_head_finance,Accès Pay imports - head_finance,microcred_profile.model_hr_import_payroll,group_microcred_head_finance,0,0,0,0
+access_partial_reconcile_head_finance,Accès lettrage partiel - head_finance,account.model_account_partial_reconcile,group_microcred_head_finance,1,1,1,1
+access_budget_element_amortisation_head_finance,Accès amortisation des éléments budgétaires - head_finance,microcred_profile.model_budget_element_amortisation,group_microcred_head_finance,1,1,1,1
+access_bank_statement_head_finance,Accès relevés bancaires - head_finance,model_account_bank_statement,group_microcred_head_finance,1,1,1,1
+access_bank_statement_line_head_finance,Accès lignes relevés bancaires - head_finance,model_account_bank_statement_line,group_microcred_head_finance,1,1,1,1
+access_res_users_accountant,Accès Utilisateurs - accountant,base.model_res_users,group_microcred_accountant,1,1,0,0
+access_res_partner_accountant,Accès Partenaires - accountant,base.model_res_partner,group_microcred_accountant,1,1,1,1
+access_sale_order_accountant,Accès Commandes de vente - accountant,sale.model_sale_order,group_microcred_accountant,0,0,0,0
+access_sale_order_line_accountant,Accès Lignes de commande de vente - accountant,sale.model_sale_order_line,group_microcred_accountant,0,0,0,0
+access_purchase_order_accountant,Accès Commandes d'achat - accountant,purchase.model_purchase_order,group_microcred_accountant,1,1,1,1
+access_purchase_order_line_accountant,Accès Lignes de commande d'achat - accountant,purchase.model_purchase_order_line,group_microcred_accountant,1,1,1,1
+access_product_product_accountant,Accès Variantes de produits - accountant,product.model_product_product,group_microcred_accountant,1,0,0,0
+access_product_template_accountant,Accès Templates de produits - accountant,product.model_product_template,group_microcred_accountant,1,0,0,0
+access_account_invoice_accountant,Accès Factures - accountant,account.model_account_move,group_microcred_accountant,1,1,1,1
+access_account_invoice_line_accountant,Accès Lignes de facture - accountant,account.model_account_move_line,group_microcred_accountant,1,1,1,1
+access_account_move_accountant,Accès Pièces comptables - accountant,account.model_account_move,group_microcred_accountant,1,1,1,1
+access_account_move_line_accountant,Accès Écritures comptables - accountant,account.model_account_move_line,group_microcred_accountant,1,1,1,1
+access_account_move_line_distribution_accountant,Accès Répartition des écritures - accountant,microcred_profile.model_account_move_line_distribution,group_microcred_accountant,1,1,1,1
+access_account_account_accountant,Accès Comptes comptables - accountant,account.model_account_account,group_microcred_accountant,1,1,1,1
+access_account_analytic_account_accountant,Accès Comptes analytiques - accountant,analytic.model_account_analytic_account,group_microcred_accountant,1,1,1,1
+access_account_journal_accountant,Accès Journaux - accountant,account.model_account_journal,group_microcred_accountant,1,1,1,1
+access_account_journal_sage_export_accountant,Accès Exports SAGE - accountant,microcred_profile.model_account_journal_sage_export,group_microcred_accountant,1,1,1,1
+access_budget_element_accountant,Accès Élements budgétaires - accountant,advanced_budget.model_budget_element,group_microcred_accountant,1,1,1,0
+access_budget_element_distribution_accountant,Accès Répartition des éléments budgétaires - accountant,advanced_budget.model_budget_element_distribution,group_microcred_accountant,1,1,1,1
+access_budget_element_member_accountant,Accès Membres des éléments budgétaires - accountant,advanced_budget.model_budget_element_member,group_microcred_accountant,1,1,1,1
+access_budget_element_personnel_accountant,Accès Personnel des éléments budgétaires - accountant,microcred_profile.model_budget_element_personnel,group_microcred_accountant,1,0,0,0
+access_budget_element_tag_accountant,Accès Étiquettes des éléments budgétaires - accountant,microcred_profile.model_budget_element_tag,group_microcred_accountant,1,0,0,0
+access_budget_element_type_accountant,Accès Types des éléments budgétaires - accountant,microcred_profile.model_budget_element_type,group_microcred_accountant,1,0,0,0
+access_account_analytic_tag_accountant,Accès Étiquettes des écritures - accountant,analytic.model_account_analytic_tag,group_microcred_accountant,1,0,0,0
+access_budget_reinvoice_batch_accountant,Accès Réfacturations - accountant,microcred_profile.model_budget_reinvoice_batch,group_microcred_accountant,1,1,1,1
+access_hr_employee_accountant,Accès Employés - accountant,hr.model_hr_employee,group_microcred_accountant,1,0,0,0
+access_project_project_accountant,Accès Projets - accountant,project.model_project_project,group_microcred_accountant,1,1,1,1
+access_account_bank_statement_accountant,Accès account.bank.statement - accountant,account.model_account_bank_statement,group_microcred_accountant,1,1,1,1
+access_account_invoice_tax_accountant,Accès Taxes de facture - accountant,account.model_account_tax,group_microcred_accountant,1,1,1,1
+access_account_period_accountant,Accès Account periods - accountant,microcred_profile.model_account_period,group_microcred_accountant,1,1,1,0
+access_budget_element_period_accountant,Accès Budget element periods - accountant,microcred_profile.model_budget_element_period,group_microcred_accountant,1,1,1,0
+access_budget_line_type_accountant,Accès Budget line types - accountant,microcred_profile.model_budget_line_type,group_microcred_accountant,1,0,0,0
+access_hr_import_payroll_accountant,Accès Pay imports - accountant,microcred_profile.model_hr_import_payroll,group_microcred_accountant,1,0,0,0
+access_partial_reconcile_accountant,Accès lettrage partiel - accountant,account.model_account_partial_reconcile,group_microcred_accountant,1,1,1,1
+access_budget_element_amortisation_accountant,Accès amortisation des éléments budgétaires - accountant,microcred_profile.model_budget_element_amortisation,group_microcred_accountant,1,1,1,1
+access_expensify_budget_accountant,Accès configuration budget expensify - Accountant,model_expensify_budget,group_microcred_accountant,1,1,1,1
+access_expensify_import_accountant,Accès imports expensify - Accountant,model_expensify_import,group_microcred_accountant,1,1,1,1
+access_expensify_product_accountant,Accès configuration produit expensify - Accountant,model_expensify_product,group_microcred_accountant,1,1,1,1
+access_bank_statement_accountant,Accès relevés bancaires - accountant,model_account_bank_statement,group_microcred_accountant,1,1,1,1
+access_bank_statement_line_accountant,Accès lignes relevés bancaires - accountant,model_account_bank_statement_line,group_microcred_accountant,1,1,1,1
+access_res_partner_project_manager,Accès Partenaires - project_manager,base.model_res_partner,group_microcred_project_manager,1,0,0,0
+access_sale_order_project_manager,Accès Commandes de vente - project_manager,sale.model_sale_order,group_microcred_project_manager,0,0,0,0
+access_sale_order_line_project_manager,Accès Lignes de commande de vente - project_manager,sale.model_sale_order_line,group_microcred_project_manager,0,0,0,0
+access_purchase_order_project_manager,Accès Commandes d'achat - project_manager,purchase.model_purchase_order,group_microcred_project_manager,1,1,1,1
+access_purchase_order_line_project_manager,Accès Lignes de commande d'achat - project_manager,purchase.model_purchase_order_line,group_microcred_project_manager,1,1,1,1
+access_product_product_project_manager,Accès Variantes de produits - project_manager,product.model_product_product,group_microcred_project_manager,1,0,0,0
+access_product_template_project_manager,Accès Templates de produits - project_manager,product.model_product_template,group_microcred_project_manager,1,0,0,0
+access_account_invoice_project_manager,Accès Factures - project_manager,account.model_account_move,group_microcred_project_manager,1,1,1,1
+access_account_invoice_line_project_manager,Accès Lignes de facture - project_manager,account.model_account_move_line,group_microcred_project_manager,1,1,1,1
+access_account_move_project_manager,Accès Pièces comptables - project_manager,account.model_account_move,group_microcred_project_manager,1,1,1,0
+access_account_move_line_project_manager,Accès Écritures comptables - project_manager,account.model_account_move_line,group_microcred_project_manager,1,1,1,0
+access_account_move_line_distribution_project_manager,Accès Répartition des écritures - project_manager,microcred_profile.model_account_move_line_distribution,group_microcred_project_manager,1,1,1,0
+access_account_account_project_manager,Accès Comptes comptables - project_manager,account.model_account_account,group_microcred_project_manager,1,0,0,0
+access_account_analytic_account_project_manager,Accès Comptes analytiques - project_manager,analytic.model_account_analytic_account,group_microcred_project_manager,1,0,0,0
+access_account_journal_project_manager,Accès Journaux - project_manager,account.model_account_journal,group_microcred_project_manager,1,0,0,0
+access_account_journal_sage_export_project_manager,Accès Exports SAGE - project_manager,microcred_profile.model_account_journal_sage_export,group_microcred_project_manager,0,0,0,0
+access_budget_element_project_manager,Accès Élements budgétaires - project_manager,advanced_budget.model_budget_element,group_microcred_project_manager,1,1,1,1
+access_budget_element_distribution_project_manager,Accès Répartition des éléments budgétaires - project_manager,advanced_budget.model_budget_element_distribution,group_microcred_project_manager,1,1,1,1
+access_budget_element_member_project_manager,Accès Membres des éléments budgétaires - project_manager,advanced_budget.model_budget_element_member,group_microcred_project_manager,1,1,1,1
+access_budget_element_personnel_project_manager,Accès Personnel des éléments budgétaires - project_manager,microcred_profile.model_budget_element_personnel,group_microcred_project_manager,1,1,1,1
+access_budget_element_tag_project_manager,Accès Étiquettes des éléments budgétaires - project_manager,microcred_profile.model_budget_element_tag,group_microcred_project_manager,1,1,1,1
+access_budget_element_type_project_manager,Accès Types des éléments budgétaires - project_manager,microcred_profile.model_budget_element_type,group_microcred_project_manager,1,1,1,1
+access_account_analytic_tag_project_manager,Accès Étiquettes des écritures - project_manager,analytic.model_account_analytic_tag,group_microcred_project_manager,1,1,1,1
+access_budget_reinvoice_batch_project_manager,Accès Réfacturations - project_manager,microcred_profile.model_budget_reinvoice_batch,group_microcred_project_manager,0,0,0,0
+access_hr_employee_project_manager,Accès Employés - project_manager,hr.model_hr_employee,group_microcred_project_manager,1,0,0,0
+access_project_project_project_manager,Accès Projets - project_manager,project.model_project_project,group_microcred_project_manager,1,1,1,1
+access_account_bank_statement_project_manager,Accès account.bank.statement - project_manager,account.model_account_bank_statement,group_microcred_project_manager,0,0,0,0
+access_account_invoice_tax_project_manager,Accès Taxes de facture - project_manager,account.model_account_tax,group_microcred_project_manager,1,1,1,1
+access_account_period_project_manager,Accès Account periods - project_manager,microcred_profile.model_account_period,group_microcred_project_manager,1,0,1,0
+access_budget_element_period_project_manager,Accès Budget element periods - project_manager,microcred_profile.model_budget_element_period,group_microcred_project_manager,1,1,1,1
+access_budget_line_type_project_manager,Accès Budget line types - project_manager,microcred_profile.model_budget_line_type,group_microcred_project_manager,1,0,0,0
+access_hr_import_payroll_project_manager,Accès Pay imports - project_manager,microcred_profile.model_hr_import_payroll,group_microcred_project_manager,0,0,0,0
+access_partial_reconcile_project_manager,Accès lettrage partiel - project_manager,account.model_account_partial_reconcile,group_microcred_project_manager,1,1,1,1
+access_budget_element_amortisation_project_manager,Accès amortisation des éléments budgétaires - project_manager,microcred_profile.model_budget_element_amortisation,group_microcred_project_manager,1,1,1,1
+access_bank_statement_project_manager,Accès relevés bancaires - project_manager,model_account_bank_statement,group_microcred_project_manager,1,0,0,0
+access_bank_statement_line_project_manager,Accès lignes relevés bancaires - project_manager,model_account_bank_statement_line,group_microcred_project_manager,1,0,0,0
+access_res_partner_legal,Accès Partenaires - legal,base.model_res_partner,group_microcred_legal,1,0,0,0
+access_sale_order_legal,Accès Commandes de vente - legal,sale.model_sale_order,group_microcred_legal,0,0,0,0
+access_sale_order_line_legal,Accès Lignes de commande de vente - legal,sale.model_sale_order_line,group_microcred_legal,0,0,0,0
+access_purchase_order_legal,Accès Commandes d'achat - legal,purchase.model_purchase_order,group_microcred_legal,0,0,0,0
+access_purchase_order_line_legal,Accès Lignes de commande d'achat - legal,purchase.model_purchase_order_line,group_microcred_legal,0,0,0,0
+access_product_product_legal,Accès Variantes de produits - legal,product.model_product_product,group_microcred_legal,1,0,0,0
+access_product_template_legal,Accès Templates de produits - legal,product.model_product_template,group_microcred_legal,1,0,0,0
+access_account_invoice_legal,Accès Factures - legal,account.model_account_move,group_microcred_legal,0,0,0,0
+access_account_invoice_line_legal,Accès Lignes de facture - legal,account.model_account_move_line,group_microcred_legal,0,0,0,0
+access_account_move_legal,Accès Pièces comptables - legal,account.model_account_move,group_microcred_legal,0,0,0,0
+access_account_move_line_legal,Accès Écritures comptables - legal,account.model_account_move_line,group_microcred_legal,0,0,0,0
+access_account_move_line_distribution_legal,Accès Répartition des écritures - legal,microcred_profile.model_account_move_line_distribution,group_microcred_legal,1,0,0,0
+access_account_account_legal,Accès Comptes comptables - legal,account.model_account_account,group_microcred_legal,0,0,0,0
+access_account_analytic_account_legal,Accès Comptes analytiques - legal,analytic.model_account_analytic_account,group_microcred_legal,0,0,0,0
+access_account_journal_legal,Accès Journaux - legal,account.model_account_journal,group_microcred_legal,0,0,0,0
+access_account_journal_sage_export_legal,Accès Exports SAGE - legal,microcred_profile.model_account_journal_sage_export,group_microcred_legal,0,0,0,0
+access_budget_element_legal,Accès Élements budgétaires - legal,advanced_budget.model_budget_element,group_microcred_legal,1,0,0,0
+access_budget_element_distribution_legal,Accès Répartition des éléments budgétaires - legal,advanced_budget.model_budget_element_distribution,group_microcred_legal,1,0,0,0
+access_budget_element_member_legal,Accès Membres des éléments budgétaires - legal,advanced_budget.model_budget_element_member,group_microcred_legal,0,0,0,0
+access_budget_element_personnel_legal,Accès Personnel des éléments budgétaires - legal,microcred_profile.model_budget_element_personnel,group_microcred_legal,0,0,0,0
+access_budget_element_tag_legal,Accès Étiquettes des éléments budgétaires - legal,microcred_profile.model_budget_element_tag,group_microcred_legal,1,0,0,0
+access_budget_element_type_legal,Accès Types des éléments budgétaires - legal,microcred_profile.model_budget_element_type,group_microcred_legal,0,0,0,0
+access_account_analytic_tag_legal,Accès Étiquettes des écritures - legal,analytic.model_account_analytic_tag,group_microcred_legal,0,0,0,0
+access_budget_reinvoice_batch_legal,Accès Réfacturations - legal,microcred_profile.model_budget_reinvoice_batch,group_microcred_legal,0,0,0,0
+access_hr_employee_legal,Accès Employés - legal,hr.model_hr_employee,group_microcred_legal,1,0,0,0
+access_project_project_legal,Accès Projets - legal,project.model_project_project,group_microcred_legal,0,0,0,0
+access_account_bank_statement_legal,Accès account.bank.statement - legal,account.model_account_bank_statement,group_microcred_legal,0,0,0,0
+access_account_invoice_tax_legal,Accès Taxes de facture - legal,account.model_account_tax,group_microcred_legal,0,0,0,0
+access_account_period_legal,Accès Account periods - legal,microcred_profile.model_account_period,group_microcred_legal,1,0,1,0
+access_budget_element_period_legal,Accès Budget element periods - legal,microcred_profile.model_budget_element_period,group_microcred_legal,1,0,0,0
+access_budget_line_type_legal,Accès Budget line types - legal,microcred_profile.model_budget_line_type,group_microcred_legal,1,0,0,0
+access_hr_import_payroll_legal,Accès Pay imports - legal,microcred_profile.model_hr_import_payroll,group_microcred_legal,0,0,0,0
+access_partial_reconcile_legal,Accès lettrage partiel - legal,account.model_account_partial_reconcile,group_microcred_legal,1,1,1,1
+access_budget_element_amortisation_legal,Accès amortisation des éléments budgétaires - legal,microcred_profile.model_budget_element_amortisation,group_microcred_legal,1,0,0,0
+access_bank_statement_legal,Accès relevés bancaires - legal,model_account_bank_statement,group_microcred_legal,1,0,0,0
+access_bank_statement_line_legal,Accès lignes relevés bancaires - legal,model_account_bank_statement_line,group_microcred_legal,1,0,0,0
+
+
+
+access_res_partner_department_manager,Accès Partenaires - department_manager,base.model_res_partner,group_microcred_department_manager,1,0,0,0
+access_sale_order_department_manager,Accès Commandes de vente - department_manager,sale.model_sale_order,group_microcred_department_manager,0,0,0,0
+access_sale_order_line_department_manager,Accès Lignes de commande de vente - department_manager,sale.model_sale_order_line,group_microcred_department_manager,0,0,0,0
+access_purchase_order_department_manager,Accès Commandes d'achat - department_manager,purchase.model_purchase_order,group_microcred_department_manager,1,1,1,1
+access_purchase_order_line_department_manager,Accès Lignes de commande d'achat - department_manager,purchase.model_purchase_order_line,group_microcred_department_manager,1,1,1,1
+access_product_product_department_manager,Accès Variantes de produits - department_manager,product.model_product_product,group_microcred_department_manager,1,0,0,0
+access_product_template_department_manager,Accès Templates de produits - department_manager,product.model_product_template,group_microcred_department_manager,1,0,0,0
+access_account_invoice_department_manager,Accès Factures - department_manager,account.model_account_move,group_microcred_department_manager,1,1,1,1
+access_account_invoice_line_department_manager,Accès Lignes de facture - department_manager,account.model_account_move_line,group_microcred_department_manager,1,1,1,1
+access_account_move_department_manager,Accès Pièces comptables - department_manager,account.model_account_move,group_microcred_department_manager,1,1,1,0
+access_account_move_line_department_manager,Accès Écritures comptables - department_manager,account.model_account_move_line,group_microcred_department_manager,1,1,1,0
+access_account_move_line_distribution_department_manager,Accès Répartition des écritures - department_manager,microcred_profile.model_account_move_line_distribution,group_microcred_department_manager,1,1,1,0
+access_account_account_department_manager,Accès Comptes comptables - department_manager,account.model_account_account,group_microcred_department_manager,1,0,0,0
+access_account_analytic_account_department_manager,Accès Comptes analytiques - department_manager,analytic.model_account_analytic_account,group_microcred_department_manager,1,0,0,0
+access_account_journal_department_manager,Accès Journaux - department_manager,account.model_account_journal,group_microcred_department_manager,1,1,0,0
+access_account_journal_sage_export_department_manager,Accès Exports SAGE - department_manager,microcred_profile.model_account_journal_sage_export,group_microcred_department_manager,0,0,0,0
+access_budget_element_department_manager,Accès Élements budgétaires - department_manager,advanced_budget.model_budget_element,group_microcred_department_manager,1,1,1,1
+access_budget_element_distribution_department_manager,Accès Répartition des éléments budgétaires - department_manager,advanced_budget.model_budget_element_distribution,group_microcred_department_manager,1,1,1,1
+access_budget_element_member_department_manager,Accès Membres des éléments budgétaires - department_manager,advanced_budget.model_budget_element_member,group_microcred_department_manager,1,1,1,1
+access_budget_element_personnel_department_manager,Accès Personnel des éléments budgétaires - department_manager,microcred_profile.model_budget_element_personnel,group_microcred_department_manager,1,1,1,1
+access_budget_element_tag_department_manager,Accès Étiquettes des éléments budgétaires - department_manager,microcred_profile.model_budget_element_tag,group_microcred_department_manager,1,1,1,1
+access_budget_element_type_department_manager,Accès Types des éléments budgétaires - department_manager,microcred_profile.model_budget_element_type,group_microcred_department_manager,1,1,1,1
+access_account_analytic_tag_department_manager,Accès Étiquettes des écritures - department_manager,analytic.model_account_analytic_tag,group_microcred_department_manager,1,1,1,1
+access_budget_reinvoice_batch_department_manager,Accès Réfacturations - department_manager,microcred_profile.model_budget_reinvoice_batch,group_microcred_department_manager,0,0,0,0
+access_hr_employee_department_manager,Accès Employés - department_manager,hr.model_hr_employee,group_microcred_department_manager,1,0,0,0
+access_project_project_department_manager,Accès Projets - department_manager,project.model_project_project,group_microcred_department_manager,1,1,1,1
+access_account_bank_statement_department_manager,Accès account.bank.statement - department_manager,account.model_account_bank_statement,group_microcred_department_manager,1,0,0,0
+access_account_invoice_tax_department_manager,Accès Taxes de facture - department_manager,account.model_account_tax,group_microcred_department_manager,1,1,1,1
+
+access_account_period_department_manager,Accès Account periods - department_manager,microcred_profile.model_account_period,group_microcred_department_manager,1,0,1,0
+access_budget_element_period_department_manager,Accès Budget element periods - department_manager,microcred_profile.model_budget_element_period,group_microcred_department_manager,1,1,1,1
+access_budget_line_type_department_manager,Accès Budget line types - department_manager,microcred_profile.model_budget_line_type,group_microcred_department_manager,1,0,0,0
+access_hr_import_payroll_department_manager,Accès Pay imports - department_manager,microcred_profile.model_hr_import_payroll,group_microcred_department_manager,0,0,0,0
+access_partial_reconcile_department_manager,Accès lettrage partiel - department_manager,account.model_account_partial_reconcile,group_microcred_department_manager,1,1,1,1
+access_budget_element_amortisation_department_manager,Accès amortisation des éléments budgétaires - department_manager,microcred_profile.model_budget_element_amortisation,group_microcred_department_manager,1,1,1,1
+access_bank_statement_department_manager,Accès relevés bancaires - department_manager,model_account_bank_statement,group_microcred_department_manager,1,1,1,0
+access_bank_statement_line_department_manager,Accès lignes relevés bancaires - department_manager,model_account_bank_statement_line,group_microcred_department_manager,1,1,1,1
+
+access_budget_element_subtype,access_budget_element_subtype,model_budget_element_subtype,,1,0,0,0
+
+access_account_axis_rule,access_account_axis_rule,model_account_axis_rule,,1,0,0,0
+access_account_axis,access_account_axis,model_account_axis,,1,0,0,0
+access_account_axis_tag,access_account_axis_tag,model_account_axis_tag,,1,0,0,0
+access_account_axis_rule,access_account_axis_rule,model_account_axis_rule,,1,0,0,0
+access_account_axis,access_account_axis,model_account_axis,,1,0,0,0
+access_expensify_budget,access_expensify_budget,model_expensify_budget,,1,0,0,0
+access_expensify_import,access_expensify_import,model_expensify_import,,1,0,0,0
+access_expensify_product,access_expensify_product,model_expensify_product,,1,0,0,0
+
+
+
+access_budget_element_form,Accès Vue des éléments budgétaires - department_manager,model_wizard_view_budget_element,group_microcred_department_manager,1,1,1,1
+
+access_budget_element_form_modify,Modifier Accès Vue des éléments budgétaires - department_manager,microcred_profile.model_wizard_modify_invoice_budget_line,group_microcred_department_manager,1,1,1,1
+
+access_change_account_tag,Acces icones tags - department_manager,microcred_profile.model_wizard_change_account_tags,group_microcred_department_manager,1,1,1,1
+
+access_change_account_tag_line,Acces icones tags - department_manager,microcred_profile.model_wizard_change_account_tags_line,group_microcred_department_manager,1,1,1,1
+
+access_modify_budget_autorized,Acces modification  - department_manager,advanced_budget.model_wizard_modify_amount,group_microcred_department_manager,1,1,1,1
+
+view_budget_data,Acces modification Budget - department_manager,microcred_profile.model_wizard_view_budget_data,group_microcred_department_manager,1,1,1,1
+
+
+access_wizard_mass_subscription,access_wizard_mass_subscription,microcred_profile.model_wizard_mass_subscription,group_microcred_department_manager,1,1,1,1
+
+
+
+access_wizard_add_budget_details_line,access_wizard_add_budget_details_line,model_wizard_add_budget_details_line,group_microcred_department_manager,1,1,1,1
+
+access_wizard_add_budget_details,access_wizard_add_budget_details,model_wizard_add_budget_details,group_microcred_department_manager,1,1,1,1
+
+access_wizard_define_monthly_budget_line,access_wizard_define_monthly_budget_line,model_wizard_define_monthly_budget_line,group_microcred_department_manager,1,1,1,1
+
+access_wizard_define_monthly_budget,access_wizard_define_monthly_budget,model_wizard_define_monthly_budget,group_microcred_department_manager,1,1,1,1
+
+access_wizard_export_budget,access_wizard_export_budget,model_wizard_export_budget,group_microcred_department_manager,1,1,1,1 
+
+access_wizard_export_journal_items,access_wizard_export_journal_items,model_wizard_export_journal_items,group_microcred_department_manager,1,1,1,1
+
+access_wizard_export_sage,access_wizard_export_sage,model_wizard_export_sage,group_microcred_department_manager,1,1,1,1
+
+access_wizard_view_budget_data_purchase_line,access_wizard_view_budget_data_purchase_line,model_wizard_view_budget_data_purchase_line,group_microcred_department_manager,1,1,1,1 
+
+access_wizard_view_budget_data_move_line_line,access_wizard_view_budget_data_move_line_line,model_wizard_view_budget_data_move_line_line,group_microcred_department_manager,1,1,1,1 
+
+access_account_axis_tag_wrapper,access_account_axis_tag_wrapper,model_account_axis_tag_wrapper,group_microcred_department_manager,1,1,1,1 
+

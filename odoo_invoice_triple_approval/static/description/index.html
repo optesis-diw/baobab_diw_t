@@ -1,0 +1,853 @@
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color:olive;"><b>Customer Invoice - Vendor Bill - Journal Entry - Credit Notes - Refund/Debit Note - Sales Receipt - Purchase Receipt ( Double and Tripple Approval Workflow )</b></h2>
+        <p style="color:red;">This module allow you to have double and tripple approval workflow on Customer Invoice - Vendor Bill - Journal Entry - Credit Notes - Refund/Debit Note - Sales Receipt - Purchase Receipt. So double and tripple approval workflow will be applied based on configuration on Accounting Journal form.</p>
+        <p>
+            <b style="color:CRIMSON;">Main Features:</b>
+            <ul style="color:olive;">
+              <li>Allow you to configure approval workflow settings on account journal form and based on configuration on accounting journal workflow of approval will apply.</li>
+              <li>This app add double and tripple approval workflow but still allow you to configure on account journal form if you do not want to apply approval workflow and want to go with odoo standard flow.</li>
+              <li>Approval workflow has been added on Customer Invoice, Vendor Bill, Journal Entry, Credit Notes, Refund/Debit Note, Sales Receipt and Purchase Receipt.</li>
+              <li>Email notifications to request for approval to next level person.</li>
+              <li>Only selected approvers on account journal form will be able to make approvals.</li>
+              <li>Please note that we have not added new stage/stage on odoo states of invoices/bills/journal entries. We have added Ribbions on right top corner in green to show stage of approval workflow.</li>
+              <li>All approvers listed on account journal should have accounting rights then only they can approve.</li>
+              <li>You can choose multiple approvers on account journal form.</li>
+              <li>For more details please see below screenshots & Video.</li>
+            </ul>
+        </p>
+        <p style="color:CRIMSON;"><b>
+          <b style="color:CRIMSON;">Flow of Second and Third Level Approval Applicable to below Menu Items:</b>
+          </p>
+          <ul style="color:olive;">
+            <li style="color:olive;">Invoices</li>
+            <li style="color:olive;">Credit Notes</li>
+            <li style="color:olive;">Receipts (Sales Receipt)</li>
+            <li style="color:olive;">Bills</li>
+            <li style="color:olive;">Refund/Debit Note</li>
+            <li style="color:olive;">Receipts (Purchase Receipt)</li>
+            <li style="color:olive;">Journal Entries</li>
+          </ul>
+        <p>
+        <p style="color:CRIMSON;"><b>
+            <b style="color:CRIMSON;">Flow of Second and Third Level Approval (Approval Type of Customer Invoices)</b>
+            </p>
+            <ul style="color:olive;">
+            <li>
+              User ==> Mitchell Admin<br/>
+              Second Approver ==> Marc Demo<br/>
+              Third Approver ==> John Smith<br/>
+              Refuser ==> Johnty Dexter<br/>
+            </li>
+            <li style="color:#ff8000;">
+                User (Mitchell Admin) can make a Invoice.
+            </li>
+            <li style="color:#ff8000;"> 
+                Second Approver (Marc Demo) can Approve Second Approval of Customer Invoice and and send notification email to selected Third Approver.
+            </li>
+            <li style="color:#ff8000;">
+                Third Approver (John Smith) can Approve Third Approval of Customer Invoice and and send notification email to Sales Person.
+            </li>
+            <li style="color:#ff8000;">
+                Refuser (Johnty Dexter) can Refuse Customer Invoice.
+            </li>
+            </ul>
+        <p>
+        <p style="color:CRIMSON;"><b>
+            <b style="color:CRIMSON;">Flow of Second and Third Level Approval (Approval Type of Journal Entry)</b>
+            </p>
+            <ul style="color:olive;">
+            <li>
+              User ==> Mitchell Admin<br/>
+              Second Approver ==> Marc Demo<br/>
+              Third Approver ==> John Smith<br/>
+              Refuser ==> Johnty Dexter<br/>
+            </li>
+            <li style="color:#ff8000;">
+                User (Mitchell Admin) can make a Journal Entry.
+            </li>
+            <li style="color:#ff8000;"> 
+                Second Approver (Marc Demo) can Approve Second Approval of Journal Entry and and send notification email to selected Third Approver.
+            </li>
+            <li style="color:#ff8000;">
+                Third Approver (John Smith) can Approve Third Approval of Journal Entry and and send notification email to Sales Person.
+            </li>
+            <li style="color:#ff8000;">
+                Refuser (Johnty Dexter) can Refuse Journal Entry.
+            </li>
+            </ul>
+        <p>
+        <p style="color:CRIMSON;"><b>
+            <b style="color:CRIMSON;">Flow of Second and Third Level Approval (Approval Type of Vendor Bill)</b>
+            </p>
+            <ul style="color:olive;">
+            <li>
+              User ==> Mitchell Admin<br/>
+              Second Approver ==> Marc Demo<br/>
+              Third Approver ==> John Smith<br/>
+              Refuser ==> Johnty Dexter<br/>
+            </li>
+            <li style="color:#ff8000;">
+                User (Mitchell Admin) can make a Vendor Bill.
+            </li>
+            <li style="color:#ff8000;"> 
+                Second Approver (Marc Demo) can Approve Second Approval of Vendor Bill and and send notification email to selected Third Approver.
+            </li>
+            <li style="color:#ff8000;">
+                Third Approver (John Smith) can Approve Third Approval of Vendor Bill and and send notification email to Sales Person.
+            </li>
+            <li style="color:#ff8000;">
+                Refuser (Johnty Dexter) can Refuse Vendor Bill.
+            </li>
+            </ul>
+        <p>
+        <p style="color:CRIMSON;"><b>
+            <b style="color:CRIMSON;">Flow of Second and Third Level Approval (Approval Type of Credit Notes)</b>
+            </p>
+            <ul style="color:olive;">
+            <li>
+              User ==> Mitchell Admin<br/>
+              Second Approver ==> Marc Demo<br/>
+              Third Approver ==> John Smith<br/>
+              Refuser ==> Johnty Dexter<br/>
+            </li>
+            <li style="color:#ff8000;">
+                User (Mitchell Admin) can make a Credit Notes.
+            </li>
+            <li style="color:#ff8000;"> 
+                Second Approver (Marc Demo) can Approve Second Approval of Credit Notes and and send notification email to selected Third Approver.
+            </li>
+            <li style="color:#ff8000;">
+                Third Approver (John Smith) can Approve Third Approval of Credit Notes and and send notification email to Sales Person.
+            </li>
+            <li style="color:#ff8000;">
+                Refuser (Johnty Dexter) can Refuse Credit Notes.
+            </li>
+            </ul>
+        <p>
+        <p style="color:CRIMSON;"><b>
+            <b style="color:CRIMSON;">Flow of Second and Third Level Approval (Approval Type of Refund/Debit Note)</b>
+            </p>
+            <ul style="color:olive;">
+            <li>
+              User ==> Mitchell Admin<br/>
+              Second Approver ==> Marc Demo<br/>
+              Third Approver ==> John Smith<br/>
+              Refuser ==> Johnty Dexter<br/>
+            </li>
+            <li style="color:#ff8000;">
+                User (Mitchell Admin) can make a Refund/Debit Note.
+            </li>
+            <li style="color:#ff8000;"> 
+                Second Approver (Marc Demo) can Approve Second Approval of Refund/Debit Note and and send notification email to selected Third Approver.
+            </li>
+            <li style="color:#ff8000;">
+                Third Approver (John Smith) can Approve Third Approval of Refund/Debit Note and and send notification email to Sales Person.
+            </li>
+            <li style="color:#ff8000;">
+                Refuser (Johnty Dexter) can Refuse Refund/Debit Note.
+            </li>
+            </ul>
+        <p>
+        <p style="color:CRIMSON;"><b>
+            <b style="color:CRIMSON;">Flow of Second and Third Level Approval (Approval Type of Sales Receipt)</b>
+            </p>
+            <ul style="color:olive;">
+            <li>
+              User ==> Mitchell Admin<br/>
+              Second Approver ==> Marc Demo<br/>
+              Third Approver ==> John Smith<br/>
+              Refuser ==> Johnty Dexter<br/>
+            </li>
+            <li style="color:#ff8000;">
+                User (Mitchell Admin) can make a Sales Receipt.
+            </li>
+            <li style="color:#ff8000;"> 
+                Second Approver (Marc Demo) can Approve Second Approval of Sales Receipt and and send notification email to selected Third Approver.
+            </li>
+            <li style="color:#ff8000;">
+                Third Approver (John Smith) can Approve Third Approval of Sales Receipt and and send notification email to Sales Person.
+            </li>
+            <li style="color:#ff8000;">
+                Refuser (Johnty Dexter) can Refuse Sales Receipt.
+            </li>
+            </ul>
+        <p>
+        <p style="color:CRIMSON;"><b>
+            <b style="color:CRIMSON;">Flow of Second and Third Level Approval (Approval Type of Purchase Receipt)</b>
+            </p>
+            <ul style="color:olive;">
+            <li>
+              User ==> Mitchell Admin<br/>
+              Second Approver ==> Marc Demo<br/>
+              Third Approver ==> John Smith<br/>
+              Refuser ==> Johnty Dexter<br/>
+            </li>
+            <li style="color:#ff8000;">
+                User (Mitchell Admin) can make a Purchase Receipt.
+            </li>
+            <li style="color:#ff8000;"> 
+                Second Approver (Marc Demo) can Approve Second Approval of Purchase Receipt and and send notification email to selected Third Approver.
+            </li>
+            <li style="color:#ff8000;">
+                Third Approver (John Smith) can Approve Third Approval of Purchase Receipt and and send notification email to Sales Person.
+            </li>
+            <li style="color:#ff8000;">
+                Refuser (Johnty Dexter) can Refuse Purchase Receipt.
+            </li>
+            </ul>
+        <p>
+<p style="color:BLACK;">ABOVE USERS AND APPROVERS ARE JUST SAMPLE USERS OF OUR DEMO SYSTEM TO EXPLAIN APP TO YOU.</p>
+   </div>
+</section>
+
+<b style="color:CRIMSON;">
+=============================================================================================================================================</b>
+<section class="oe_container">
+   <div class="row">
+          <div class="col-12">
+              <center>
+                  <p style="font-size:25px; border-width:0px; border-style:solid;background-color: #4BB0A2;width:450px;color:white; " class="px-sm-4 p-2 pt-4">
+                        <b>Edition Compatibility:</b>
+                  </p><br/>
+                  <span class="btn btn-primary fa fa-check-circle" style="width:auto; font-weight:bold; font-size:21px; padding-top:12px; padding-bottom:12px; padding-left:60px; padding-right:60px; border-radius:28px; color:white; border:none;background-color: purple;">    Enterprise</span>
+                  <span class="btn btn-primary fa fa-check-circle" style="width:auto; font-weight:bold; font-size:21px; padding-top:12px; padding-bottom:12px; padding-left:60px; padding-right:60px; border-radius:28px; color:white; border:none;background-color: purple;">    Odoo.sh</span>
+                  <span class="btn btn-primary fa fa-check-circle" style="width:auto; font-weight:bold; font-size:21px; padding-top:12px; padding-bottom:12px; padding-left:60px; padding-right:60px; border-radius:28px; color:white; border:none;background-color: purple;">    Community</span>
+              </center>
+              <br/>
+       </div>
+   </div>
+</section>
+
+
+<h2 class="oe_slogan"><center><b style="color:olive;">Customer Invoices</b></h2></center>
+
+<h2 class="oe_slogan"><b style="color:blue;">Flow of Second and Third Level Approval(Approval Type of Customer Invoices)</b></h2>
+
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Approval Settings on Journal Form</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="1.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Customer Invoice Form in Waiting Second Approval</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="2.1.png">
+           <img src="2.2.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Notification to Second Approver Wizard</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="3.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Email Notification send to Second Approval</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="4.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Second Approval Button on Customer Invoice Form</b></h2>
+       <b style="color:CRIMSON;">Second Approver (Marc Demo) can logged in System and Approve Second Approval of Customer Invoice</b>
+       <div class="oe_demo oe_screenshot">
+           <img src="5.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Second Approver send notification email to selected Third Approval.</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="6.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Mail Notification send to Third Approval</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="7.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Third Approval Button and details of Second Approvals on Customer Invoice Form </b></h2>
+       <b style="color:CRIMSON;">Third Approver (John Smith) can logged in System and Approve Third Approval of Customer Invoice</b>
+       <div class="oe_demo oe_screenshot">
+           <img src="8.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Details of Third Approvals on Customer Invoice Form</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="9.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Mail Notification send to Sales Person after clicking Third Approval button</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="10.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Attachments in Email</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="11.png">
+       </div>
+   </div>
+</section>
+
+<b style="color:olive;">--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</b>
+
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Refuse button on Customer Invoice Form</b></h2>
+      <b style="color:CRIMSON;">Refuser (Johnty Dexter) can logged in System and Refuse Customer Invoice</b>
+       <div class="oe_demo oe_screenshot">
+           <img src="12.1.png">
+           <img src="12.2.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Reason for Refuse Customer Invoice</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="13.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Reason for Refuse Details on Customer Invoice Form</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="14.png">
+       </div>
+   </div>
+</section>
+
+<b style="color:CRIMSON;">
+=============================================================================================================================================</b>
+
+<h2 class="oe_slogan"><center><b style="color:olive;">Journal Entry</b></h2></center>
+
+
+<h2 class="oe_slogan"><b style="color:blue;">Flow of Second and Third Level Approval(Approval Type of Journal Entry)</b></h2>
+
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Approval Settings on Journal Form</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="journal1.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Journal Entry Form in Waiting Second Approval</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="journal2.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Notify Second Approver Wizard</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="journal3.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Email notification send to Second Approval</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="journal4.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Second Approval Button on Journal Entry Form</b></h2>
+       <b style="color:CRIMSON;">Second Approver (Marc Demo) can logged in System and Approve Second Approval of Journal Entry</b>
+       <div class="oe_demo oe_screenshot">
+           <img src="journal5.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Second Approver send Notification Email to selected Third Approval</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="journal6.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Mail Notification send to Third Approval</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="journal7.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Third Approval Button and details of Second Approvals on Journal Entry Form </b></h2>
+       <b style="color:CRIMSON;">Third Approver (John Smith) can logged in System and Approve Third Approval of Journal Entry</b>
+       <div class="oe_demo oe_screenshot">
+           <img src="journal8.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Details of Third Approvals on Journal Entry Form</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="journal9.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Mail Notification send to Salesperson after clicking Third Approval button</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="journal10.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Attachments in Email</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="journal11.png">
+       </div>
+   </div>
+</section>
+
+<b style="color:olive;">--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</b>
+
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Refuse button on Journal Entry Form</b></h2>
+       <b style="color:CRIMSON;">Refuser (Johnty Dexter) can logged in System and Refuse Journal Entry</b>
+       <div class="oe_demo oe_screenshot">
+           <img src="journal12.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Reason for Refuse Journal Entry</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="journal131.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Reason for Refuse Details on Journal Entry Form</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="journal141.png">
+       </div>
+   </div>
+</section>
+
+<b style="color:CRIMSON;">
+=============================================================================================================================================</b>
+
+<h2 class="oe_slogan"><center><b style="color:olive;">Vendor Bill</b></h2></center>
+
+
+<h2 class="oe_slogan"><b style="color:blue;">Flow of Second and Third Level Approval(Approval Type of Vendor Bill)</b></h2>
+
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Approval Settings on Journal Form</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="bill1.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Vendor Bill Form in Waiting Second Approval</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="bill2.1.png">
+           <img src="bill2.2.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Notify Second Approver Wizard</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="bill3.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Email Notification send to Second Approval</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="bill4.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Second Approval Button on Vendor Bill Form</b></h2>
+       <b style="color:CRIMSON;">Second Approver (Marc Demo) can logged in System and Approve Second Approval of Vendor Bill</b>
+       <div class="oe_demo oe_screenshot">
+           <img src="bill5.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Second approver send Notification Email to selected Third Approval</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="bill6.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Mail Notification send to Third Approval</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="bill7.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Third Approval Button and details of Second Approvals on Vendor Bill Form </b></h2>
+        <b style="color:CRIMSON;">Third Approver (John Smith) can logged in System and Approve Third Approval of Vendor Bill</b>
+       <div class="oe_demo oe_screenshot">
+           <img src="bill8.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Details of Third Approvals on Vendor Bill Form</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="bill9.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Mail Notification send to Salesperson after clicking Third Approval button</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="bill10.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Attachments in Email</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="bill11.png">
+       </div>
+   </div>
+</section>
+
+<b style="color:olive;">--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</b>
+
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Refuse button on Vendor Bill Form</b></h2>
+       <b style="color:CRIMSON;">Refuser (Johnty Dexter) can logged in System and Refuse Vendor Bill</b>
+       <div class="oe_demo oe_screenshot">
+           <img src="bill12.1.png">
+           <img src="bill12.2.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Reason for Refuse Vendor Bill</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="bill131.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Reason for Refuse Details on Vendor Bill Form</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="bill141.png">
+       </div>
+   </div>
+</section>
+
+<b style="color:CRIMSON;">
+=============================================================================================================================================</b>
+
+<h2 class="oe_slogan"><center><b style="color:olive;">Credit Notes</b></h2></center>
+
+
+<h2 class="oe_slogan"><b style="color:blue;">Flow of Second and Third Level Approval(Approval Type of Credit Notes)</b></h2>
+
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Approval Settings on Credit Notes Form</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="creditnote1.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Credit Notes Form in Waiting Second Approval</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="creditnote2.1.png">
+           <img src="creditnote2.2.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Second Approval Button on Credit Notes Form</b></h2>
+       <b style="color:CRIMSON;">Second Approver (Marc Demo) can logged in System and Approve Second Approval of Credit Notes</b>
+       <div class="oe_demo oe_screenshot">
+           <img src="creditnote3.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Third Approval Button and details of Second Approvals on Credit Notes Form </b></h2>
+       <b style="color:CRIMSON;">Third Approver (John Smith) can logged in System and Approve Third Approval of Credit Notes</b>
+       <div class="oe_demo oe_screenshot">
+           <img src="creditnote4.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Details of Third Approvals on Credit Notes Form</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="creditnote5.png">
+       </div>
+   </div>
+</section>
+
+<b style="color:olive;">--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</b>
+
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Refuse button on Credit Notes Form</b></h2>
+       <b style="color:CRIMSON;">Refuser (Johnty Dexter) can logged in System and Refuse Credit Notes</b>
+       <div class="oe_demo oe_screenshot">
+           <img src="creditnote6.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Reason for Refuse Details on Credit Notes Form</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="creditnote7.png">
+       </div>
+   </div>
+</section>
+
+<b style="color:CRIMSON;">
+=============================================================================================================================================</b>
+
+<h2 class="oe_slogan"><center><b style="color:olive;">Refund/Debit Note</b></h2></center>
+
+
+<h2 class="oe_slogan"><b style="color:blue;">Flow of Second and Third Level Approval(Approval Type of Refund/Debit Note)</b></h2>
+
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Approval Settings on Refund/Debit Note Form</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="vendornote1.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Refund/Debit Note Form in Waiting Second Approval</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="vendornote2.1.png">
+           <img src="vendornote2.2.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Second Approval Button on Refund/Debit Note Form</b></h2>
+       <b style="color:CRIMSON;">Second Approver (Marc Demo) can logged in System and Approve Second Approval of Refund/Debit Note</b>
+       <div class="oe_demo oe_screenshot">
+           <img src="vendornote2nd.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Third Approval Button and details of Second Approvals on Refund/Debit Note Form </b></h2>
+       <b style="color:CRIMSON;">Third Approver (John Smith) can logged in System and Approve Third Approval of Refund/Debit Note</b>
+       <div class="oe_demo oe_screenshot">
+           <img src="vendornote3.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Details of Third Approvals on Refund/Debit Note Form</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="vendornote4.png">
+       </div>
+   </div>
+</section>
+
+<b style="color:olive;">--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</b>
+
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Refuse button on Refund/Debit Note Form</b></h2>
+       <b style="color:CRIMSON;">Refuser (Johnty Dexter) can logged in System and Refuse Refund/Debit Note</b>
+       <div class="oe_demo oe_screenshot">
+           <img src="vendornote5.1.png">
+           <img src="vendornote5.2.png">
+       </div>
+   </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+       <h2 class="oe_slogan"><b style="color:CRIMSON;">Reason for Refuse Details on Refund/Debit Note Form</b></h2>
+       <div class="oe_demo oe_screenshot">
+           <img src="vendornote61.png">
+       </div>
+   </div>
+</section>
+
+<b style="color:CRIMSON;">
+=============================================================================================================================================</b>
+
+<h2 class="oe_slogan"><center><b style="color:olive;">Sales Receipt</b></h2></center>
+
+
+<h2 class="oe_slogan"><b style="color:blue;">Flow of Second and Third Level Approval(Approval Type of Sales Receipt)</b></h2>
+
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+      <h2 class="oe_slogan"><b style="color:CRIMSON;">Sales Receipt Form in Waiting Second Approval</b></h2>
+      <div class="oe_demo oe_screenshot">
+          <img src="salesreceipt.png">
+          <img src="salesreceipt1.png">
+      </div>
+    </div>
+</section>
+
+<h2 class="oe_slogan"><b style="color:black;">As per above other flows Sales Receipt flow working same as for Second and Third Approval</b></h2>
+
+<b style="color:CRIMSON;">
+=============================================================================================================================================</b>
+
+<h2 class="oe_slogan"><center><b style="color:olive;">Purchase Receipt</b></h2></center>
+
+
+<h2 class="oe_slogan"><b style="color:blue;">Flow of Second and Third Level Approval(Approval Type of Purchase Receipt)</b></h2>
+
+<section class="oe_container">
+   <div class="oe_row oe_spaced">
+      <h2 class="oe_slogan"><b style="color:CRIMSON;">Purchase Receipt Form in Waiting Second Approval</b></h2>
+      <div class="oe_demo oe_screenshot">
+          <img src="purchase1.1.png">
+          <img src="purchase1.2.png">
+      </div>
+    </div>
+</section>
+
+<h2 class="oe_slogan"><b style="color:black;">As per above other flows Purchase Receipt flow working same for Second and Third Approval</b></h2>
+
+<b style="color:CRIMSON;">
+=============================================================================================================================================</b>
+
+<section class="oe_container" >
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan">
+            <strong><font style="color:#2dd280;" class="text-epsilon">Contact / Support<br/></font></strong>
+            <strong><font style="color:crimson" class="text-epsilon">Introducing</font>
+            <font style="color:crimson;" class="text-epsilon">Probuse Consulting Services Pvt. Ltd.</font></strong>
+          </h2>
+       <div class="oe_span6">
+           <div class="mt32 col-md-10">
+           <div class="oe_picture" style="margin: 25px 10%;">
+               <a  target='new' href="http://www.probuse.com/">
+                   <img src="logo.png">
+               </a>
+           </div>
+           <p class="oe_mt32">
+               <font style="color:crimson;">If you need any help or want more additional features, you may contact us through:</font><br/>
+               <font style="color:crimson;">Email: <a href="contact@probuse.com">contact@probuse.com</a> <br/>
+               <font style="color:crimson;">Website: </font><a href="http://www.probuse.com/" target='new'><u>www.probuse.com</u></a> <br/>
+               <font style="color:crimson;">Skype: mustufa_probuse</font><br/>
+           </p>
+           <p>
+                <h2>
+                    <a href="https://www.facebook.com/probusecs" target="new">
+                      <i class="fa fa-facebook-square" style="font-size:38px;"></i>
+                    </a>
+                    <a href="https://twitter.com/mustufa_odoo" target="new">
+                      <i class="fa fa-twitter" style="font-size:38px;"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mustufa-rangwala-odoo-openerp-0a46777/" target="new">
+                      <i class="fa fa-linkedin" style="font-size:38px;"></i>
+                    </a>
+                    <!--<a href="https://www.youtube.com/channel/UCHlyoC4khP44M1cOCJXo2FQ" target="new">
+                      <i class="fa fa-youtube-play" style="font-size:38px;"></i>
+                    </a>-->
+                    <a href="https://plus.google.com/u/0/113284573788891837715/posts" target="new" rel="publisher">
+                      <i class="fa fa-google-plus-square" style="font-size:38px;"></i>
+                    </a>
+              </h2>
+            </p>
+           </div>
+       </div>
+    <div class="mt32 oe_span6">
+           <p style="text-align: justify; ">
+            <font class="text-epsilon" style="color:crimson;">Probuse Consulting Service Pvt Ltd is an Software and Web development specialist which offers complete business application together. We are well experienced to provide a face for your business on the software and Internet level.</font>
+          </p>
+          <p style="text-align: justify;">
+            <font class="text-epsilon" style="color:crimson">Probuse Consulting Service Pvt Ltd is a specialist in Odoo/OpenERP services and could give your business open source hand to drive.</font>
+          </p>
+            <h3 class="o_animate o_anim_bounce_in" style="text-align: left; animation-play-state: paused;">
+                <font style="font-size: 18px;color:#ff8000;" class="text-epsilon"><strong>Our Services</strong></font>
+            </h3>
+            <ul style="list-style-type:square">
+                <a href="http://www.probuse.com/page/odoo-implementation" target="new"><li list-style-type: "*";><p style="text-align: left; color:crimson;">Odoo Implementation</p></a></li>
+                <a href="http://www.probuse.com/page/odoo-support" target="new"><li><p style="text-align: left; color:crimson;">Odoo Support</p></a></li>
+                <a href="http://www.probuse.com/page/odoo-customization" target="new"><li><p style="text-align: left; color:crimson;">Odoo Customization</p></li></a>
+                <a href="http://www.probuse.com/page/odoo-migration" target="new"><li><p style="text-align: left; color:crimson;">Odoo Migration</p></a></li>
+                <a href="http://www.probuse.com/page/odoo-training" target="new"><li><p style="text-align: left; color:crimson;">Odoo Training</p></a></li>
+            </ul>
+           </p>
+       </div>
+   </div>
+</section>

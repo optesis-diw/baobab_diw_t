@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2017 SYLEAM Info Services
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+        <record id="view_currency_form_update" model="ir.ui.view">
+            <field name="name">res.currency.form.update</field>
+            <field name="model">res.currency</field>
+            <field name="inherit_id" ref="base.view_currency_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='active']" position="after">
+                    <field name="update"/>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>
