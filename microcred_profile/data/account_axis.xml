@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    microcred_profile module for odoo, Profile for Microcred
+        #    Copyright (C) 2017 SYLEAM Info Services ([http://www.syleam.fr/])
+        #              Chris Tribbeck [chris.tribbeck@syleam.fr]
+        #
+        #    This file is a part of microcred_profile
+        #
+        #    microcred_profile is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    microcred_profile is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+        <record id="axis_sas_plan_1" model="account.axis">
+            <field name="name">Plan 1</field>
+            <field name="number" eval="1"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="axis_type">mono</field>
+            <field name="sage_export" eval="True"/>
+        </record>
+        <record id="axis_sas_plan_2" model="account.axis">
+            <field name="name">Plan 2</field>
+            <field name="number" eval="2"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="axis_type">mono</field>
+            <field name="sage_export" eval="True"/>
+        </record>
+        <record id="axis_sas_plan_3" model="account.axis">
+            <field name="name">Plan 3</field>
+            <field name="number" eval="3"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="axis_type">mono</field>
+            <field name="sage_export" eval="True"/>
+            <field name="budget_split" eval="True"/>
+        </record>
+        <record id="axis_sas_plan_4" model="account.axis">
+            <field name="name">Plan 4</field>
+            <field name="number" eval="4"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="axis_type">single</field>
+            <field name="sage_export" eval="True"/>
+            <field name="reinvoice" eval="True"/>
+        </record>
+        <record id="axis_sas_programme" model="account.axis">
+            <field name="name">Programme</field>
+            <field name="number" eval="5"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="axis_type">single</field>
+        </record>
+        <record id="axis_sas_finance" model="account.axis">
+            <field name="name">Finance</field>
+            <field name="number" eval="6"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="axis_type">multi</field>
+        </record>
+        <record id="axis_sas_other" model="account.axis">
+            <field name="name">Others</field>
+            <field name="number" eval="7"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="axis_type">multi</field>
+        </record>
+
+        <!-- Rules for plan 1, Microcred SAS -->
+        <record id="axis_sas_plan_1_move_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="axis_id" ref="axis_sas_plan_1"/>
+            <field name="application">optional</field>
+        </record>
+       <!-- <record id="axis_sas_plan_1_depreciation_line" model="account.axis.rule">
+            <field name="model_id" ref="account_asset.model_account_asset_depreciation_line"/>
+            <field name="axis_id" ref="axis_sas_plan_1"/>
+            <field name="application">optional</field>
+        </record> -->
+        <record id="axis_sas_plan_1_analytic_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_analytic_line"/>
+            <field name="axis_id" ref="axis_sas_plan_1"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_1_invoice" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="axis_id" ref="axis_sas_plan_1"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_1_invoice_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="axis_id" ref="axis_sas_plan_1"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_1_purchase" model="account.axis.rule">
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="axis_id" ref="axis_sas_plan_1"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_1_purchase_line" model="account.axis.rule">
+            <field name="model_id" ref="purchase.model_purchase_order_line"/>
+            <field name="axis_id" ref="axis_sas_plan_1"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_1_budget_element_line" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_1"/>
+            <field name="application">optional</field>
+            <field name="subtype">budget_line</field>
+        </record>
+        <record id="axis_sas_plan_1_budget_element_detail" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_1"/>
+            <field name="application">optional</field>
+            <field name="subtype">budget_detail</field>
+        </record>
+        <record id="axis_sas_plan_1_budget_element_periodic" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_1"/>
+            <field name="application">optional</field>
+            <field name="subtype">periodic</field>
+        </record>
+        <record id="axis_sas_plan_1_budget_element_project" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_1"/>
+            <field name="application">optional</field>
+            <field name="subtype">project</field>
+        </record>
+        <record id="axis_sas_plan_1_budget_line_type" model="account.axis.rule">
+            <field name="model_id" ref="microcred_profile.model_budget_line_type"/>
+            <field name="axis_id" ref="axis_sas_plan_1"/>
+            <field name="application">optional</field>
+        </record>
+
+        <!-- Rules for plan 2, Microcred SAS -->
+        <record id="axis_sas_plan_2_move_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="axis_id" ref="axis_sas_plan_2"/>
+            <field name="application">optional</field>
+        </record>
+       <!-- <record id="axis_sas_plan_2_depreciation_line" model="account.axis.rule">
+            <field name="model_id" ref="account_asset.model_account_asset_depreciation_line"/>
+            <field name="axis_id" ref="axis_sas_plan_2"/>
+            <field name="application">optional</field>
+        </record> -->
+        <record id="axis_sas_plan_2_analytic_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_analytic_line"/>
+            <field name="axis_id" ref="axis_sas_plan_2"/>
+            <field name="application">optional</field>
+        </record>
+       <!-- <record id="axis_sas_plan_2_invoice" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_invoice"/>
+            <field name="axis_id" ref="axis_sas_plan_2"/>
+            <field name="application">optional</field>
+        </record> -->
+       <!-- <record id="axis_sas_plan_2_invoice_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_invoice_line"/>
+            <field name="axis_id" ref="axis_sas_plan_2"/>
+            <field name="application">optional</field>
+        </record> -->
+        <record id="axis_sas_plan_2_purchase" model="account.axis.rule">
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="axis_id" ref="axis_sas_plan_2"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_2_purchase_line" model="account.axis.rule">
+            <field name="model_id" ref="purchase.model_purchase_order_line"/>
+            <field name="axis_id" ref="axis_sas_plan_2"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_2_budget_element_line" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_2"/>
+            <field name="application">optional</field>
+            <field name="subtype">budget_line</field>
+        </record>
+        <record id="axis_sas_plan_2_budget_element_detail" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_2"/>
+            <field name="application">optional</field>
+            <field name="subtype">budget_detail</field>
+        </record>
+        <record id="axis_sas_plan_2_budget_element_periodic" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_2"/>
+            <field name="application">optional</field>
+            <field name="subtype">periodic</field>
+        </record>
+        <record id="axis_sas_plan_2_budget_element_project" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_2"/>
+            <field name="application">optional</field>
+            <field name="subtype">project</field>
+        </record>
+        <record id="axis_sas_plan_2_budget_line_type" model="account.axis.rule">
+            <field name="model_id" ref="microcred_profile.model_budget_line_type"/>
+            <field name="axis_id" ref="axis_sas_plan_2"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_2_product_category" model="account.axis.rule">
+            <field name="model_id" ref="product.model_product_category"/>
+            <field name="axis_id" ref="axis_sas_plan_2"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_2_product_template" model="account.axis.rule">
+            <field name="model_id" ref="product.model_product_template"/>
+            <field name="axis_id" ref="axis_sas_plan_2"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_2_product_product" model="account.axis.rule">
+            <field name="model_id" ref="product.model_product_product"/>
+            <field name="axis_id" ref="axis_sas_plan_2"/>
+            <field name="application">optional</field>
+        </record>
+
+        <!-- Rules for plan 3, Microcred SAS -->
+        <record id="axis_sas_plan_3_move_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="axis_id" ref="axis_sas_plan_3"/>
+            <field name="application">optional</field>
+        </record>
+       <!-- <record id="axis_sas_plan_3_depreciation_line" model="account.axis.rule">
+            <field name="model_id" ref="account_asset.model_account_asset_depreciation_line"/>
+            <field name="axis_id" ref="axis_sas_plan_3"/>
+            <field name="application">optional</field>
+        </record> -->
+        <record id="axis_sas_plan_3_analytic_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_analytic_line"/>
+            <field name="axis_id" ref="axis_sas_plan_3"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_3_invoice" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="axis_id" ref="axis_sas_plan_3"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_3_invoice_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="axis_id" ref="axis_sas_plan_3"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_3_purchase" model="account.axis.rule">
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="axis_id" ref="axis_sas_plan_3"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_3_purchase_line" model="account.axis.rule">
+            <field name="model_id" ref="purchase.model_purchase_order_line"/>
+            <field name="axis_id" ref="axis_sas_plan_3"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_3_budget_element_line" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_3"/>
+            <field name="application">optional</field>
+            <field name="subtype">budget_line</field>
+        </record>
+        <record id="axis_sas_plan_3_budget_element_detail" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_3"/>
+            <field name="application">optional</field>
+            <field name="subtype">budget_detail</field>
+        </record>
+        <record id="axis_sas_plan_3_budget_element_periodic" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_3"/>
+            <field name="application">optional</field>
+            <field name="subtype">periodic</field>
+        </record>
+        <record id="axis_sas_plan_3_budget_element_project" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_3"/>
+            <field name="application">optional</field>
+            <field name="subtype">project</field>
+        </record>
+        <record id="axis_sas_plan_3_budget_element_department" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_3"/>
+            <field name="application">optional</field>
+            <field name="subtype">department</field>
+        </record>
+        <record id="axis_sas_plan_3_budget_line_type" model="account.axis.rule">
+            <field name="model_id" ref="microcred_profile.model_budget_line_type"/>
+            <field name="axis_id" ref="axis_sas_plan_3"/>
+            <field name="application">optional</field>
+        </record>
+
+        <!-- Rules for plan 4, Microcred SAS -->
+        <record id="axis_sas_plan_4_analytic_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_analytic_line"/>
+            <field name="axis_id" ref="axis_sas_plan_4"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_plan_4_budget_element_line" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_4"/>
+            <field name="application">optional</field>
+            <field name="subtype">budget_line</field>
+        </record>
+        <record id="axis_sas_plan_4_budget_element_detail" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_4"/>
+            <field name="application">optional</field>
+            <field name="subtype">budget_detail</field>
+        </record>
+        <record id="axis_sas_plan_4_budget_element_periodic" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_4"/>
+            <field name="application">optional</field>
+            <field name="subtype">periodic</field>
+        </record>
+        <record id="axis_sas_plan_4_budget_element_project" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_4"/>
+            <field name="application">optional</field>
+            <field name="subtype">project</field>
+        </record>
+        <record id="axis_sas_plan_4_budget_element_department" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_4"/>
+            <field name="application">optional</field>
+            <field name="subtype">department</field>
+        </record>
+        <record id="axis_sas_plan_4_budget_element_partner" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_plan_4"/>
+            <field name="application">optional</field>
+            <field name="subtype">partner</field>
+        </record>
+        <record id="axis_sas_plan_4_budget_line_type" model="account.axis.rule">
+            <field name="model_id" ref="microcred_profile.model_budget_line_type"/>
+            <field name="axis_id" ref="axis_sas_plan_4"/>
+            <field name="application">optional</field>
+        </record>
+
+        <!-- Rules for programme, Microcred SAS -->
+        <record id="axis_sas_programme_move_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="axis_id" ref="axis_sas_programme"/>
+            <field name="application">optional</field>
+        </record>
+      <!--  <record id="axis_sas_programme_depreciation_line" model="account.axis.rule">
+            <field name="model_id" ref="account_asset.model_account_asset_depreciation_line"/>
+            <field name="axis_id" ref="axis_sas_programme"/>
+            <field name="application">optional</field>
+        </record> -->
+        <record id="axis_sas_programme_analytic_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_analytic_line"/>
+            <field name="axis_id" ref="axis_sas_programme"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_programme_invoice" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="axis_id" ref="axis_sas_programme"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_programme_invoice_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="axis_id" ref="axis_sas_programme"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_programme_purchase" model="account.axis.rule">
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="axis_id" ref="axis_sas_programme"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_programme_purchase_line" model="account.axis.rule">
+            <field name="model_id" ref="purchase.model_purchase_order_line"/>
+            <field name="axis_id" ref="axis_sas_programme"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_programme_budget_element_line" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_programme"/>
+            <field name="application">optional</field>
+            <field name="subtype">budget_line</field>
+        </record>
+        <record id="axis_sas_programme_budget_element_detail" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_programme"/>
+            <field name="application">optional</field>
+            <field name="subtype">budget_detail</field>
+        </record>
+        <record id="axis_sas_programme_budget_element_periodic" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_programme"/>
+            <field name="application">optional</field>
+            <field name="subtype">periodic</field>
+        </record>
+        <record id="axis_sas_programme_budget_element_project" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_programme"/>
+            <field name="application">optional</field>
+            <field name="subtype">project</field>
+        </record>
+        <record id="axis_sas_programme_budget_line_type" model="account.axis.rule">
+            <field name="model_id" ref="microcred_profile.model_budget_line_type"/>
+            <field name="axis_id" ref="axis_sas_programme"/>
+            <field name="application">optional</field>
+        </record>
+
+        <!-- Rules for finance, Microcred SAS -->
+        <record id="axis_sas_finance_move_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="axis_id" ref="axis_sas_finance"/>
+            <field name="application">optional</field>
+        </record>
+     <!--   <record id="axis_sas_finance_depreciation_line" model="account.axis.rule">
+            <field name="model_id" ref="account_asset.model_account_asset_depreciation_line"/>
+            <field name="axis_id" ref="axis_sas_finance"/>
+            <field name="application">optional</field>
+        </record> -->
+        <record id="axis_sas_finance_analytic_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_analytic_line"/>
+            <field name="axis_id" ref="axis_sas_finance"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_finance_invoice" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="axis_id" ref="axis_sas_finance"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_finance_invoice_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="axis_id" ref="axis_sas_finance"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_finance_purchase" model="account.axis.rule">
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="axis_id" ref="axis_sas_finance"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_finance_purchase_line" model="account.axis.rule">
+            <field name="model_id" ref="purchase.model_purchase_order_line"/>
+            <field name="axis_id" ref="axis_sas_finance"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_finance_budget_element_line" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_finance"/>
+            <field name="application">optional</field>
+            <field name="subtype">budget_line</field>
+        </record>
+        <record id="axis_sas_finance_budget_element_detail" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_finance"/>
+            <field name="application">optional</field>
+            <field name="subtype">budget_detail</field>
+        </record>
+        <record id="axis_sas_finance_budget_element_periodic" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_finance"/>
+            <field name="application">optional</field>
+            <field name="subtype">periodic</field>
+        </record>
+        <record id="axis_sas_finance_budget_element_project" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_finance"/>
+            <field name="application">optional</field>
+            <field name="subtype">project</field>
+        </record>
+        <record id="axis_sas_finance_budget_line_type" model="account.axis.rule">
+            <field name="model_id" ref="microcred_profile.model_budget_line_type"/>
+            <field name="axis_id" ref="axis_sas_finance"/>
+            <field name="application">optional</field>
+        </record>
+
+        <!-- Rules for other, Microcred SAS -->
+        <record id="axis_sas_other_move_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="axis_id" ref="axis_sas_other"/>
+            <field name="application">optional</field>
+        </record>
+       <!-- <record id="axis_sas_other_depreciation_line" model="account.axis.rule">
+            <field name="model_id" ref="account_asset.model_account_asset_depreciation_line"/>
+            <field name="axis_id" ref="axis_sas_other"/>
+            <field name="application">optional</field>
+        </record> -->
+        <record id="axis_sas_other_analytic_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_analytic_line"/>
+            <field name="axis_id" ref="axis_sas_other"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_other_invoice" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="axis_id" ref="axis_sas_other"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_other_invoice_line" model="account.axis.rule">
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="axis_id" ref="axis_sas_other"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_other_purchase" model="account.axis.rule">
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="axis_id" ref="axis_sas_other"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_other_purchase_line" model="account.axis.rule">
+            <field name="model_id" ref="purchase.model_purchase_order_line"/>
+            <field name="axis_id" ref="axis_sas_other"/>
+            <field name="application">optional</field>
+        </record>
+        <record id="axis_sas_other_budget_element_line" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_other"/>
+            <field name="application">optional</field>
+            <field name="subtype">budget_line</field>
+        </record>
+        <record id="axis_sas_other_budget_element_detail" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_other"/>
+            <field name="application">optional</field>
+            <field name="subtype">budget_detail</field>
+        </record>
+        <record id="axis_sas_other_budget_element_periodic" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_other"/>
+            <field name="application">optional</field>
+            <field name="subtype">periodic</field>
+        </record>
+        <record id="axis_sas_other_budget_element_project" model="account.axis.rule">
+            <field name="model_id" ref="advanced_budget.model_budget_element"/>
+            <field name="axis_id" ref="axis_sas_other"/>
+            <field name="application">optional</field>
+            <field name="subtype">project</field>
+        </record>
+        <record id="axis_sas_other_budget_line_type" model="account.axis.rule">
+            <field name="model_id" ref="microcred_profile.model_budget_line_type"/>
+            <field name="axis_id" ref="axis_sas_other"/>
+            <field name="application">optional</field>
+        </record>
+
+        <record id="microcred_profile.tag_axis_1_finr" model="account.axis.tag"><field name="name">FINR</field><field name="axis_id" ref="axis_sas_plan_1"/></record>
+        <record id="microcred_profile.tag_axis_1_gnex" model="account.axis.tag"><field name="name">GNEX</field><field name="axis_id" ref="axis_sas_plan_1"/><field name="extra_data">customer</field></record>
+        <record id="microcred_profile.tag_axis_1_perc" model="account.axis.tag"><field name="name">PERC</field><field name="axis_id" ref="axis_sas_plan_1"/></record>
+        <record id="microcred_profile.tag_axis_1_reic" model="account.axis.tag"><field name="name">REIC</field><field name="axis_id" ref="axis_sas_plan_1"/><field name="extra_data">supplier</field></record>
+        <record id="microcred_profile.tag_axis_1_tahg" model="account.axis.tag"><field name="name">TAHG</field><field name="axis_id" ref="axis_sas_plan_1"/></record>
+        <record id="microcred_profile.tag_axis_1_targ" model="account.axis.tag"><field name="name">TARG</field><field name="axis_id" ref="axis_sas_plan_1"/></record>
+        <record id="microcred_profile.tag_axis_2_arep" model="account.axis.tag"><field name="name">AREP</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_cmte" model="account.axis.tag"><field name="name">CMTE</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_conf" model="account.axis.tag"><field name="name">CONF</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_cons" model="account.axis.tag"><field name="name">CONS</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_depr" model="account.axis.tag"><field name="name">DEPR</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_divd" model="account.axis.tag"><field name="name">DIVD</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_eqso" model="account.axis.tag"><field name="name">EQSO</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_guar" model="account.axis.tag"><field name="name">GUAR</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_inta" model="account.axis.tag"><field name="name">INTA</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_legf" model="account.axis.tag"><field name="name">LEGF</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_mis1" model="account.axis.tag"><field name="name">MIS1</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_mis2" model="account.axis.tag"><field name="name">MIS2</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_mis3" model="account.axis.tag"><field name="name">MIS3</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_mis4" model="account.axis.tag"><field name="name">MIS4</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_miss" model="account.axis.tag"><field name="name">MISS</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_oaud" model="account.axis.tag"><field name="name">OAUD</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_ocod" model="account.axis.tag"><field name="name">OCOD</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_ocom" model="account.axis.tag"><field name="name">OCOM</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_oleg" model="account.axis.tag"><field name="name">OLEG</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_opec" model="account.axis.tag"><field name="name">OPEC</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_orev" model="account.axis.tag"><field name="name">OREV</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_over" model="account.axis.tag"><field name="name">OVER</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_prof" model="account.axis.tag"><field name="name">PROF</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_recr" model="account.axis.tag"><field name="name">RECR</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_salr" model="account.axis.tag"><field name="name">SALR</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_sora" model="account.axis.tag"><field name="name">SORA</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_tare" model="account.axis.tag"><field name="name">TARE</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_trng" model="account.axis.tag"><field name="name">TRNG</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_trsl" model="account.axis.tag"><field name="name">TRSL</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_2_webs" model="account.axis.tag"><field name="name">WEBS</field><field name="axis_id" ref="axis_sas_plan_2"/></record>
+        <record id="microcred_profile.tag_axis_3_com" model="account.axis.tag"><field name="name">COM</field><field name="axis_id" ref="axis_sas_plan_3"/></record>
+        <record id="microcred_profile.tag_axis_3_dev" model="account.axis.tag"><field name="name">DEV</field><field name="axis_id" ref="axis_sas_plan_3"/></record>
+        <record id="microcred_profile.tag_axis_3_dir" model="account.axis.tag"><field name="name">DIR</field><field name="axis_id" ref="axis_sas_plan_3"/></record>
+        <record id="microcred_profile.tag_axis_3_fin" model="account.axis.tag"><field name="name">FIN</field><field name="axis_id" ref="axis_sas_plan_3"/></record>
+        <record id="microcred_profile.tag_axis_3_inf" model="account.axis.tag"><field name="name">INF</field><field name="axis_id" ref="axis_sas_plan_3"/></record>
+        <record id="microcred_profile.tag_axis_3_itc" model="account.axis.tag"><field name="name">ITC</field><field name="axis_id" ref="axis_sas_plan_3"/></record>
+        <record id="microcred_profile.tag_axis_3_mal" model="account.axis.tag"><field name="name">MAL</field><field name="axis_id" ref="axis_sas_plan_3"/></record>
+        <record id="microcred_profile.tag_axis_3_npf" model="account.axis.tag"><field name="name">NPF</field><field name="axis_id" ref="axis_sas_plan_3"/></record>
+        <record id="microcred_profile.tag_axis_3_reh" model="account.axis.tag"><field name="name">REH</field><field name="axis_id" ref="axis_sas_plan_3"/></record>
+        <record id="microcred_profile.tag_axis_3_seg" model="account.axis.tag"><field name="name">SEG</field><field name="axis_id" ref="axis_sas_plan_3"/></record>
+        <record id="microcred_profile.tag_axis_4A_orev" model="account.axis.tag"><field name="name">OREV</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">A</field></record>
+        <record id="microcred_profile.tag_axis_4A_tare" model="account.axis.tag"><field name="name">TARE</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">A</field></record>
+        <record id="microcred_profile.tag_axis_4A_oexp" model="account.axis.tag"><field name="name">OEXP</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">A</field></record>
+        <record id="microcred_profile.tag_axis_4B_101" model="account.axis.tag"><field name="name">101</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">B</field></record>
+        <record id="microcred_profile.tag_axis_4B_102" model="account.axis.tag"><field name="name">102</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">B</field></record>
+        <record id="microcred_profile.tag_axis_4B_201" model="account.axis.tag"><field name="name">201</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">B</field></record>
+        <record id="microcred_profile.tag_axis_4B_104" model="account.axis.tag"><field name="name">104</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">B</field></record>
+        <record id="microcred_profile.tag_axis_4B_103" model="account.axis.tag"><field name="name">103</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">B</field></record>
+        <record id="microcred_profile.tag_axis_4B_202" model="account.axis.tag"><field name="name">202</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">B</field></record>
+        <record id="microcred_profile.tag_axis_4B_105" model="account.axis.tag"><field name="name">105</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">B</field></record>
+        <record id="microcred_profile.tag_axis_4B_106" model="account.axis.tag"><field name="name">106</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">B</field></record>
+        <!-- <record id="microcred_profile.tag_axis_4B_200" model="account.axis.tag"><field name="name">200</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">B</field></record>
+        <record id="microcred_profile.tag_axis_4B_107" model="account.axis.tag"><field name="name">107</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">B</field></record>
+        <record id="microcred_profile.tag_axis_4B_100" model="account.axis.tag"><field name="name">100</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">B</field></record>
+        <record id="microcred_profile.tag_axis_4B_999" model="account.axis.tag"><field name="name">999</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">B</field></record>
+        <record id="microcred_profile.tag_axis_4B_900" model="account.axis.tag"><field name="name">900</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">B</field></record>
+        <record id="microcred_profile.tag_axis_4B_000" model="account.axis.tag"><field name="name">000</field><field name="axis_id" ref="axis_sas_plan_4"/><field name="subgroup">B</field></record> -->
+
+
+</odoo>

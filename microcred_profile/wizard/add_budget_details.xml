@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    microcred_profile module for odoo, Microcred profile
+        #    Copyright (C) 2016 Syleam ([http://www.syleam.fr/])
+        #              Chris Tribbeck [chris.tribbeck@syleam.fr]
+        #
+        #    This file is a part of microcred_profile
+        #
+        #    microcred_profile is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    microcred_profile is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+        <record model="ir.ui.view" id="view_wizard_add_budget_details_microcred_form">
+            <field name="name">wizard.add.budget.details.form</field>
+            <field name="model">wizard.add.budget.details</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="advanced_budget.view_wizard_add_budget_details_form"/>
+            <field name="priority" eval="90"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='budget_line_id']" position="after">
+                    <field name="default_budget_line_type_id" invisible="1" />
+                </xpath>
+                <xpath expr="//tree/field[@name='name']" position="before">
+                    <field name="budget_line_type_id" options="{'no_create': True, 'no_open': True}"/>
+                </xpath>
+                <xpath expr="//tree/field[@name='amount_fixed']" position="after">
+                    <field name="date_planned"/>
+                    <field name="amortisation_time"/>
+                    <field name="amortisation_date" attrs="{'required': [('amortisation_time','!=', 0.0)]}"/>
+                    <field name="axis_tag_ids" readonly="1" widget="many2many_tags"/>
+                    <field name="tag_ids" widget="many2many_tags" />
+                    <field name="programme_tag_ids" widget="many2many_tags" options="{'no_create': True, 'no_open': True}"/>
+                    <field name="finance_tag_ids" widget="many2many_tags" options="{'no_create': True, 'no_open': True}"/>
+                </xpath>
+                <xpath expr="//field[@name='line_ids']" position="attributes">
+                    <attribute name="context">{'default_budget_line_type_id': default_budget_line_type_id}</attribute>
+                </xpath>
+                <xpath expr="//div" position="replace">
+                    <div colspan="2">
+                        This assistant allows you to define the details for the selected budget line. In order to create a purchase for a detail, please click on the budget line.<br/>
+                        Distribtion costs and axis tags must be also defined after clicking on the budget line.
+                    </div>
+                </xpath>
+                <!--
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="editable" eval="False"/>
+                </xpath>
+                -->
+                <xpath expr="//tree" position="after">
+                    <form string="Label">
+                        <group colspan="4" col="4">
+                            <field name="product_id"/>
+                            <field name="name"/>
+                            <field name="amount_fixed"/>
+                            <field name="date_planned"/>
+                            <field name="date_planned"/>
+                            <field name="amortisation_time"/>
+                            <field name="amortisation_date" attrs="{'required': [('amortisation_time','!=', 0.0)]}"/>
+                            <field name="axis_tag_ids" readonly="1" widget="many2many_tags"/>
+                            <field name="tag_ids" widget="many2many_tags" />
+                            <field name="programme_tag_ids" widget="many2many_tags" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="finance_tag_ids" widget="many2many_tags" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                    </form>
+                </xpath>
+            </field>
+        </record>
+
+
+</odoo>

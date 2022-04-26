@@ -1,0 +1,21 @@
+.divBgcHeader{
+    background-color: #E20375;
+    height: 90px;
+}
+.divOblique{
+    border: 60px solid;
+    border-bottom-width: 90px;
+    border-top: none;
+    border-right: none;
+    border-color: transparent #E20375;
+    margin-left: -1px;
+}
+
+address span[itemprop="name"]{
+    font-weight: bold;
+}
+
+.divFooter{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

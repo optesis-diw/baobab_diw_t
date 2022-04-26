@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    microcred_profile module for odoo, Microcred profile
+        #    Copyright (C) 2016 Syleam ([http://www.syleam.fr/])
+        #              Chris Tribbeck [chris.tribbeck@syleam.fr]
+        #
+        #    This file is a part of microcred_profile
+        #
+        #    microcred_profile is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    microcred_profile is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+        <record id="microcred_profile.tag_finr" model="account.analytic.tag"><field name="name">FINR</field><field name="axis">1</field></record>
+        <record id="microcred_profile.tag_gnex" model="account.analytic.tag"><field name="name">GNEX</field><field name="axis">1</field><field name="invoice_type">customer</field></record>
+        <record id="microcred_profile.tag_perc" model="account.analytic.tag"><field name="name">PERC</field><field name="axis">1</field></record>
+        <record id="microcred_profile.tag_reic" model="account.analytic.tag"><field name="name">REIC</field><field name="axis">1</field><field name="invoice_type">supplier</field></record>
+        <record id="microcred_profile.tag_tahg" model="account.analytic.tag"><field name="name">TAHG</field><field name="axis">1</field></record>
+        <record id="microcred_profile.tag_targ" model="account.analytic.tag"><field name="name">TARG</field><field name="axis">1</field></record>
+        <record id="microcred_profile.tag_arep" model="account.analytic.tag"><field name="name">AREP</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_cmte" model="account.analytic.tag"><field name="name">CMTE</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_conf" model="account.analytic.tag"><field name="name">CONF</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_cons" model="account.analytic.tag"><field name="name">CONS</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_depr" model="account.analytic.tag"><field name="name">DEPR</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_divd" model="account.analytic.tag"><field name="name">DIVD</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_eqso" model="account.analytic.tag"><field name="name">EQSO</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_guar" model="account.analytic.tag"><field name="name">GUAR</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_inta" model="account.analytic.tag"><field name="name">INTA</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_legf" model="account.analytic.tag"><field name="name">LEGF</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_mis1" model="account.analytic.tag"><field name="name">MIS1</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_mis2" model="account.analytic.tag"><field name="name">MIS2</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_mis3" model="account.analytic.tag"><field name="name">MIS3</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_mis4" model="account.analytic.tag"><field name="name">MIS4</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_miss" model="account.analytic.tag"><field name="name">MISS</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_oaud" model="account.analytic.tag"><field name="name">OAUD</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_ocod" model="account.analytic.tag"><field name="name">OCOD</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_ocom" model="account.analytic.tag"><field name="name">OCOM</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_oleg" model="account.analytic.tag"><field name="name">OLEG</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_opec" model="account.analytic.tag"><field name="name">OPEC</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_orev" model="account.analytic.tag"><field name="name">OREV</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_over" model="account.analytic.tag"><field name="name">OVER</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_prof" model="account.analytic.tag"><field name="name">PROF</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_recr" model="account.analytic.tag"><field name="name">RECR</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_salr" model="account.analytic.tag"><field name="name">SALR</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_sora" model="account.analytic.tag"><field name="name">SORA</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_tare" model="account.analytic.tag"><field name="name">TARE</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_trng" model="account.analytic.tag"><field name="name">TRNG</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_trsl" model="account.analytic.tag"><field name="name">TRSL</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_webs" model="account.analytic.tag"><field name="name">WEBS</field><field name="axis">2</field></record>
+        <record id="microcred_profile.tag_com" model="account.analytic.tag"><field name="name">COM</field><field name="axis">3</field></record>
+        <record id="microcred_profile.tag_dev" model="account.analytic.tag"><field name="name">DEV</field><field name="axis">3</field></record>
+        <record id="microcred_profile.tag_dir" model="account.analytic.tag"><field name="name">DIR</field><field name="axis">3</field></record>
+        <record id="microcred_profile.tag_fin" model="account.analytic.tag"><field name="name">FIN</field><field name="axis">3</field></record>
+        <record id="microcred_profile.tag_inf" model="account.analytic.tag"><field name="name">INF</field><field name="axis">3</field></record>
+        <record id="microcred_profile.tag_itc" model="account.analytic.tag"><field name="name">ITC</field><field name="axis">3</field></record>
+        <record id="microcred_profile.tag_mal" model="account.analytic.tag"><field name="name">MAL</field><field name="axis">3</field></record>
+        <record id="microcred_profile.tag_npf" model="account.analytic.tag"><field name="name">NPF</field><field name="axis">3</field></record>
+        <record id="microcred_profile.tag_reh" model="account.analytic.tag"><field name="name">REH</field><field name="axis">3</field></record>
+        <record id="microcred_profile.tag_seg" model="account.analytic.tag"><field name="name">SEG</field><field name="axis">3</field></record>
+        <record id="microcred_profile.tag_orev" model="account.analytic.tag"><field name="name">OREV</field><field name="axis">4A</field></record>
+        <record id="microcred_profile.tag_tare" model="account.analytic.tag"><field name="name">TARE</field><field name="axis">4A</field></record>
+        <record id="microcred_profile.tag_oexp" model="account.analytic.tag"><field name="name">OEXP</field><field name="axis">4A</field></record>
+        <record id="microcred_profile.tag_101" model="account.analytic.tag"><field name="name">101</field><field name="axis">4B</field></record>
+        <record id="microcred_profile.tag_102" model="account.analytic.tag"><field name="name">102</field><field name="axis">4B</field></record>
+        <record id="microcred_profile.tag_201" model="account.analytic.tag"><field name="name">201</field><field name="axis">4B</field></record>
+        <record id="microcred_profile.tag_104" model="account.analytic.tag"><field name="name">104</field><field name="axis">4B</field></record>
+        <record id="microcred_profile.tag_103" model="account.analytic.tag"><field name="name">103</field><field name="axis">4B</field></record>
+        <record id="microcred_profile.tag_202" model="account.analytic.tag"><field name="name">202</field><field name="axis">4B</field></record>
+        <record id="microcred_profile.tag_105" model="account.analytic.tag"><field name="name">105</field><field name="axis">4B</field></record>
+        <record id="microcred_profile.tag_106" model="account.analytic.tag"><field name="name">106</field><field name="axis">4B</field></record>
+        <record id="microcred_profile.tag_200" model="account.analytic.tag"><field name="name">200</field><field name="axis">4B</field></record>
+        <record id="microcred_profile.tag_107" model="account.analytic.tag"><field name="name">107</field><field name="axis">4B</field></record>
+        <record id="microcred_profile.tag_100" model="account.analytic.tag"><field name="name">100</field><field name="axis">4B</field></record>
+        <record id="microcred_profile.tag_999" model="account.analytic.tag"><field name="name">999</field><field name="axis">4B</field></record>
+        <record id="microcred_profile.tag_900" model="account.analytic.tag"><field name="name">900</field><field name="axis">4B</field></record>
+        <record id="microcred_profile.tag_000" model="account.analytic.tag"><field name="name">000</field><field name="axis">4B</field></record>
+
+</odoo>

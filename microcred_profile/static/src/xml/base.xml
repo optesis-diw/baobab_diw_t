@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2017 SYLEAM Info Services
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+
+
+<templates id="template" xml:space="preserve">
+    <!-- replace UserMenu dropdown-menu defined in addons/web/static/src/xml/base.xml -->
+    <t t-extend="UserMenu" >
+        <t t-jquery="ul.dropdown-menu li:first-child" t-operation="after">
+            <li><a href="#" data-menu="userguide">User Guide</a></li>
+        </t>
+    </t>
+</templates>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    microcred_profile module for odoo, Profile for Microcred
+        #    Copyright (C) 2016 SYLEAM Info Services ([http://www.Syleam.fr/])
+        #              Yannis Pou-Vich [yannis.pouvich@syleam.fr]
+        #
+        #    This file is a part of microcred_profile
+        #
+        #    microcred_profile is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    microcred_profile is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+        <template id="microcred_profile_minimal_layout" inherit_id="web.minimal_layout">
+            <xpath expr="//head" position="inside">
+                <link href="/microcred_profile/static/src/css/layout.css" rel="stylesheet" />
+            </xpath>
+        </template>
+
+<!--         <template id="microcred_profile_layout" inherit_id="web.web_layout">
+            <xpath expr="//head" position="inside">
+                <link href="/microcred_profile/static/src/css/layout.css" rel="stylesheet" />
+            </xpath>
+        </template> -->
+
+
+        <template id="microcred_profile_external_layout_header" inherit_id="web.external_layout_standard">
+           <!-- <xpath expr="//div[@t-field='company.rml_header1']" position="replace" />
+            <xpath expr="//div[@class='row zero_min_height']" position="replace" />
+            <xpath expr="//div[@name='company_address']" position="replace" />
+            <xpath expr="//img/.." position="attributes">
+                <attribute name="class">col-xs-3 pull-right</attribute>
+            </xpath> -->
+            <xpath expr="//img" position="attributes">
+                <attribute name="class">pull-right</attribute>
+                <attribute name="style">max-height: 90px</attribute>
+            </xpath>
+            <xpath expr="//img/.." position="before">
+                <div class="col-xs-7 divBgcHeader"></div>
+                <div class="col-xs-1 divOblique"></div>
+            </xpath>
+        </template>
+
+</odoo>

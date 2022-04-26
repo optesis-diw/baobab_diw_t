@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    microcred_profile module for odoo, Profile for Microcred
+        #    Copyright (C) 2016 SYLEAM Info Services ([http://www.Syleam.fr/])
+        #              Yannis Pou-Vich [yannis.pouvich@syleam.fr]
+        #
+        #    This file is a part of microcred_profile
+        #
+        #    microcred_profile is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    microcred_profile is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+        <record id="view_account_analityc_line_microcred_form" model="ir.ui.view">
+            <field name="name">account.analytic.line.microcred.form</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='unit_amount']" position="after">
+                    <label for="tag_ids" string="Axes"/>
+                    <div>
+                        <field name="tag_ids" widget="many2many_tags" readonly="1" class="oe_inline"/>
+                        <button help="Change Tags" icon="fa-map-o" type="action" name="%(action_wizard_change_account_tags)d" class="oe_inline oe_link" />
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>

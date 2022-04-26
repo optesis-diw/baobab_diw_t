@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    advanced_budget module for odoo, Advanced budgets
+        #    Copyright (C) 2016 Syleam ([http://www.syleam.fr/])
+        #              Chris Tribbeck [chris.tribbeck@syleam.fr]
+        #
+        #    This file is a part of advanced_budget
+        #
+        #    advanced_budget is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    advanced_budget is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+        <record id="purchase_order_advanced_budget_form" model="ir.ui.view">
+            <field name="name">purchase.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="priority" eval="90"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='account_analytic_id']" position="after">
+                    <field name="budget_element_id" 
+                      domain="[
+                              ('state', '=', 'open'),
+                              ('type_id', 'in', (%(advanced_budget.budget_element_type_line)d,   %(advanced_budget.budget_element_type_detail)d)), 
+                              ('budget_detail_ids', '=', False), ('is_readonly', '=', False),'|', ('company_id', '=', False)]" options="{'no_create': True}" /> 
+                </xpath>
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="default_budget_element_id" invisible="1" />
+                </xpath>
+                <xpath expr="//field[@name='order_line']" position="attributes">
+                    <attribute name="context">{'default_budget_element_id': default_budget_element_id, 'default_company_id': company_id}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='price_subtotal']" position="after">
+                    <button string="Specific distribution" icon="fa-tasks" type="action" class="oe_edit_only"
+                        name="%(action_wizard_add_budget_distribution)d" attrs="{'invisible': [('budget_element_id','=', False)]}"/>
+                </xpath>
+                <!-- Removed for the moment
+                <xpath expr="//notebook" position="inside">
+                    <page string="Cost distribution">
+                        <field name="distribution_cost_ids" attrs="{'readonly': [('state', 'not in', ['draft'])]}">
+                            <tree editable="bottom">
+                                <field name="child_id" domain="[('type', 'in', ('department', 'partner'))]" options="{'no_create': True}" string="Partner or Department" required="1" />
+                                <field name="amount_fixed"/>
+                                <field name="percentage"/>
+                                <field name="amount_calculated" sum="Amount planned"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+                -->
+                <xpath expr="//field[@name='message_ids']" position="attributes">
+                    <attribute name="disable_attachment_box">1</attribute>
+                </xpath>
+                
+            </field>
+        </record>
+
+
+</odoo>

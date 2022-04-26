@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_move_second_approval_wizard_custom" model="ir.ui.view">
+            <field name="name">custom.account.move.second.approval.wizard.form</field>
+            <field name="model">custom.account.move.second.approval.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <p>This wizard will send notification email to selected second approver.</p>
+                    <group>
+                        <field name="custom_second_approval_notify_id" class="col-md-6"/>
+                        <field name="move_id" invisible='1'/>
+                    </group>
+                    <footer>
+                        <button name="action_account_move_second_approval_notify" string="Notify" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_account_move_second_approval_wizard" model="ir.actions.act_window">
+            <field name="name">Notification to Second Approver</field>
+            <field name="res_model">custom.account.move.second.approval.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_account_move_second_approval_wizard_custom"/>
+            <field name="target">new</field>
+        </record>
+        
+   </data>
+</odoo>
