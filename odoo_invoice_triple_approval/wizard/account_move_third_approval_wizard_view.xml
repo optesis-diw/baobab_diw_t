@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_move_third_approval_wizard_custom" model="ir.ui.view">
+            <field name="name">custom.account.move.third.approval.wizard.form</field>
+            <field name="model">custom.account.move.third.approval.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <p attrs="{'invisible': [('is_custom_third_approval_readonlty', '=', True)]}">This wizard allow second approver to approve and send notification email to selected third approver.</p>
+                    <p attrs="{'invisible': [('is_custom_third_approval_readonlty', '=', False)]}">This wizard allow second approver to approve and send notification email to post purpose.</p>
+                    <group>
+                        <field name="custom_third_approval_notify_id" class="col-md-6" attrs="{'invisible': [('is_custom_third_approval_readonlty', '=', True)],'required': [('is_custom_third_approval_readonlty', '=', False)]}"/>
+                        <field name="move_id" invisible='1'/>
+                        <field name="is_custom_third_approval_readonlty" invisible='1'/>
+                    </group>
+                    <footer>
+                        <button name="action_account_move_third_approval_notify" string="Approve" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_account_move_third_approval_wizard" model="ir.actions.act_window">
+            <field name="name">Second Approval</field>
+            <field name="res_model">custom.account.move.third.approval.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_account_move_third_approval_wizard_custom"/>
+            <field name="target">new</field>
+        </record>
+        
+   </data>
+</odoo>

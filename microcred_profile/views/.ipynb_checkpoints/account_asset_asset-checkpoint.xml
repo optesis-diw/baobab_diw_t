@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    microcred_profile module for odoo, Profile for Microcred
+        #    Copyright (C) 2016 Syleam ([http://www.syleam.fr/])
+        #              Chris Tribbeck [chris.tribbeck@syleam.fr]
+        #
+        #    This file is a part of microcred_profile
+        #
+        #    microcred_profile is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    microcred_profile is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+        <record model="ir.ui.view" id="view_account_asset_accrued_expense_form">
+            <field name="name">account.asset.accrued.expense.form</field>
+            <field name="model">account.asset</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Asset">
+                    <header>
+                        <button name="validate" states="draft" string="Confirm" type="object" class="oe_highlight"/>
+                        <button type="object" name="compute_depreciation_board" string="Compute Depreciation" states="draft"/>
+                        <button name="%(action_wizard_asset_sale_date)d" states="open" string="Sell or Dispose" type="action" class="oe_highlight"/>
+                        <button name="set_to_draft" states="open" string="Set to Draft" type="object" />
+                       
+                        <field name="state" widget="statusbar" statusbar_visible="draft,open"/>
+                    </header>
+                    <sheet>
+                        <!--<div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="open_entries"  type="object" icon="fa-pencil">
+                                <field string="Items" name="entry_count" widget="statinfo" />
+                            </button>
+                        </div> -->
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="e.g. Laptop iBook"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="asset_type" help="Category of asset"/> 
+                                <!--<field name="code"/> -->
+                                <field name="acquisition_date" help="Date of asset"/>
+                                <field name="budget_element_id" required="1"
+                                    domain="[('state', '=', 'open'), ('type_id', 'in', (%(advanced_budget.budget_element_type_line)d, %(advanced_budget.budget_element_type_detail)d)), ('budget_detail_ids', '=', False), ('is_readonly', '=', False), ('user_can_modify', '=', True), '|', ('company_id', '=', False), ('company_id', '=', company_id), ('asset_category_id', '=', category_id)]" />
+                                <field name="accrued_date_end" required="1" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                                <field name="account_accrued_id" required="1" attrs="{'readonly': [('state','!=', 'draft')]}" domain="[('company_id','=', company_id)]"/>
+                                <field name="credit_note_move_id" attrs="{'invisible': [('credit_note_move_id','=', False)]}"/>
+                                <!-- <field name="type" invisible="1"/> -->
+                            </group>
+                            <group>
+                                <field name="currency_id" groups="base.group_multi_currency"/>
+                                <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                                <field name="original_value" widget="monetary" options="{'currency_field': 'currency_id'}" help="Gross value of asset"/> 
+                                <!--field name="salvage_value" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible': [('type','=','sale')]}"/-->
+                                <field name="value_residual" widget="monetary" options="{'currency_field': 'currency_id'}" string="Accrued remaining"/>
+                                <div>
+                                    <label for="partner_id" string="Customer" attrs="{'invisible': [('type','==','purchase')]}"/>
+                                    <label for="partner_id" string="Vendor" attrs="{'invisible': [('type','!=','purchase')]}"/>
+                                </div>
+                             <!--   <field name="partner_id" string="Partner" nolabel="1"/> 
+                             <field name="move_id" string="Invoice" options="{'no_create': True}"/> -->
+                                <field name="invoice_line_id"/>
+                            </group>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Accrued Expense Board">
+                                <field name="account_depreciation_id" mode="tree" options="{'reload_whole_on_button': true}">
+                                   <!-- <tree string="Depreciation Lines" decoration-info="(move_check == False)" create="false">
+                                       <field name="depreciation_date"/>
+                                        <field name="depreciated_value" readonly="1" string="Accrued total"/>  
+                                        <field name="amount" widget="monetary" string="Accrued amount"/>
+                                        <field name="remaining_value" readonly="1" widget="monetary" string="Accrued remaining"/> 
+                                        <button string="Modify distributions" icon="fa-tasks" type="action"
+                                            name="%(advanced_budget.action_wizard_add_budget_distribution)d" attrs="{'invisible': [('can_redistribute', '==', False)]}"/>
+                                       <field name="can_redistribute" invisible="1" /> 
+                                        <field name="move_check" invisible="1"/> 
+                                       <field name="parent_state" invisible="1"/>
+                                       <field name="budget_element_id"/> 
+                                       <button name="create_move" type="object" widget="widgetonbutton"/> 
+                                    </tree>  -->
+                                    <form string="Depreciation Lines"> 
+                                        <group>
+                                            <group>
+                                               <!-- <field name="parent_state" invisible="1"/> -->
+                                                <field name="name"/>
+                                                <label for="all_tag_ids" string="Axes"/>
+                                                <div>
+                                                    <field name="all_tag_ids" widget="many2many_tags" readonly="1" class="oe_inline"/>
+                                                    <button help="Change Tags" icon="fa-map-o" type="action"
+                                                        name="%(action_wizard_change_account_tags)d" class="oe_inline oe_link"
+                                                        attrs="{'invisible': [('move_id', '!=', False)]}"/>
+                                                </div>
+                                                <field name="budget_element_id" attrs="{'readonly': [('move_check','!=', False)]}"/>
+                                                <field name="sequence"/>
+                                                <field name="move_id"/>
+                                                <field name="compensation_move_id"/>
+                                               <!-- <field name="move_check"/> 
+                                                <field name="parent_state" invisible="1"/> -->
+                                            </group>
+                                          <!--  <group>
+                                                <field name="amount" widget="monetary"/>
+                                                <field name="depreciation_date"/>
+                                                <field name="depreciated_value"/>
+                                                <field name="remaining_value"/>
+                                            </group>  -->
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                       <!--     <page string="Accrued Expense Information">
+                                <group>
+                                    <field name="method" widget="radio" attrs="{'invisible': [('type','=','sale')]}"/>
+                                    <field name="method_progress_factor" attrs="{'invisible':[('method','=','linear')], 'required':[('method','=','degressive')]}"/>
+                                    <label for="method_time"/>
+                                    <div>
+                                        <field name="method_time"/>
+                                    </div>
+                                    <field name="prorata" attrs="{'invisible': [('method_time','=','end')]}"/>
+                                    <field name="daily_prorata" attrs="{'invisible': [('prorata','=', False)], 'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                                <group>
+                                    <field name="method_number" attrs="{'invisible':[('method_time','=','end')], 'required':[('method_time','=','number')]}"/>
+                                    <field name="method_period"/>
+                                    <field name="method_end" attrs="{'required': [('method_time','=','end')], 'invisible':[('method_time','=','number')]}"/>
+                                </group>
+                            </page>
+                            <page string="Budget element amortisation">
+                               <button string="Calculate table" type="object" name="calculate_element_table"/>
+                                <field name="element_amortisation_ids">
+                                    <tree string="Element amortisations" editable="top" create="false" delete="false">
+                                        <field name="date_start" readonly="1" />
+                                        <field name="date_end" readonly="1" />
+                                        <field name="budget_element_id" attrs="{'readonly': [('can_modify','=', False)]}"/>
+                                        <field name="amount_amortised"/>
+                                        <field name="can_modify" invisible="1" />
+                                        <field name="initial_element_id" invisible="1" />
+                                    </tree>
+                                </field>
+                            </page> -->
+                        </notebook> 
+                    </sheet> 
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+   <!--   <record model="ir.ui.view" id="view_account_asset_accrued_expense_tree">
+            <field name="name">account.asset.accrued.expense.tree</field>
+            <field name="model">account.asset</field>
+            <field name="arch" type="xml">
+                <tree string="Assets" decoration-info="(state == 'draft')" decoration-muted="(state == 'close')">
+                    <field name="name"/>
+                    <field name="category_id"/>
+                    <field name="date"/>
+                    <field name="partner_id" string="Vendor"/>
+                    <field name="value"/>
+                    <field name="value_residual" widget="monetary"/>
+                    <field name="currency_id" groups="base.group_multi_currency"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_account_asset_accrued_expense_form">
+            <field name="name">Accrued Expenses</field>
+            <field name="res_model">account.asset</field>
+            
+            <field name="view_id" ref="view_account_asset_accrued_expense_tree"/>
+            <field name="domain">[('category_id.type', '=', 'purchase'), ('is_accrued_expense', '=', True)]</field>
+        </record>
+        <record id="action_invoice_accrued_expense_view_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            
+            <field name="view_id" ref="microcred_profile.view_account_asset_accrued_expense_tree"/>
+            <field name="act_window_id" ref="action_account_asset_accrued_expense_form"/>
+        </record>
+        <record id="action_invoice_accrued_expense_view_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+           
+            <field name="view_id" ref="microcred_profile.view_account_asset_accrued_expense_form"/>
+            <field name="act_window_id" ref="action_account_asset_accrued_expense_form"/>
+        </record>
+
+        <menuitem parent="account.menu_finance_entries" id="menu_action_account_asset_accrued_expense_form" action="action_account_asset_accrued_expense_form" sequence="102" groups="account.group_account_user"/>
+
+        <record model="ir.ui.view" id="view_account_asset_asset_form">
+            <field name="name">account.asset.microcred.form</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_asset_form"/>
+            <field name="priority" eval="90"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='set_to_close']" position="replace">
+                    <button name="%(action_wizard_asset_sale_date)d" states="open" string="Sell or Dispose" type="action" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//field[@name='move_id']" position="after">
+                    <field name="invoice_line_id"/>
+                </xpath>
+                <xpath expr="//tree/field[@name='remaining_value']" position="after">
+                    <button string="Modify distributions" icon="fa-tasks" type="action"
+                        name="%(advanced_budget.action_wizard_add_budget_distribution)d" attrs="{'invisible': [('can_redistribute', '==', False)]}"/>
+                    <field name="can_redistribute" invisible="1" />
+                </xpath>
+                <xpath expr="//field[@name='category_id']" position="attributes">
+                    <attribute name="domain">[('type', '=', 'purchase'), ('is_accrued_expense', '=', False), ('company_id', '=', company_id)]</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="product_account_id" required="1" domain="[('company_id','=', company_id)]"/>
+                    <field name="budget_element_id" required="1"
+                        domain="[('state', '=', 'open'), ('type_id', 'in', (%(advanced_budget.budget_element_type_line)d, %(advanced_budget.budget_element_type_detail)d)), ('budget_detail_ids', '=', False), ('is_readonly', '=', False), ('user_can_modify', '=', True), '|', ('company_id', '=', False), ('company_id', '=', company_id), ('asset_category_id', '=', category_id)]" />
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Budget element amortisation">
+                        <button string="Calculate table" type="object" name="calculate_element_table"/>
+                        <field name="element_amortisation_ids">
+                            <tree string="Element amortisations" editable="top" create="false" delete="false">
+                                <field name="date_start" readonly="1" />
+                                <field name="date_end" readonly="1" />
+                                <field name="budget_element_id" attrs="{'readonly': [('can_modify','=', False)]}"/>
+                                <field name="amount_amortised"/>
+                                <field name="can_modify" invisible="1" />
+                                <field name="initial_element_id" invisible="1" />
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr="//tree//field[@name='parent_state']" position="after">
+                    <field name="budget_element_id"/>
+                </xpath>
+                <xpath expr="//field[@name='depreciation_line_ids']//form//field[@name='name']" position="after">
+                    <field name="budget_element_id" attrs="{'readonly': [('move_check','!=', False)]}"/>
+                    <label for="all_tag_ids" string="Axes"/>
+                    <div>
+                        <field name="all_tag_ids" widget="many2many_tags" readonly="1" class="oe_inline"/>
+                        <button help="Change Tags" icon="fa-map-o" type="action"
+                            name="%(action_wizard_change_account_tags)d" class="oe_inline oe_link"
+                            attrs="{'invisible': [('move_id', '!=', False)]}"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="account_asset.action_account_asset_asset_form">
+            <field name="domain">[('category_id.type', '=', 'purchase'), ('is_accrued_expense', '=', False)]</field>
+        </record>
+
+        <record id="action_invoice_asset_view_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+           
+            <field name="view_id" ref="account_asset.view_account_asset_category_tree"/>
+            <field name="act_window_id" ref="account_asset.action_account_asset_asset_list_normal_purchase"/>
+        </record>
+        <record id="action_invoice_asset_view_form" model="ir.actions.act_window.view">
+            
+            <field name="view_id" ref="account_asset.view_account_asset_category_form"/>
+            <field name="act_window_id" ref="account_asset.action_account_asset_asset_list_normal_purchase"/>
+        </record>
+
+        <record id="action_asset_view_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            
+            <field name="view_id" ref="account_asset.view_account_asset_asset_purchase_tree"/>
+            <field name="act_window_id" ref="account_asset.action_account_asset_asset_form"/>
+        </record>
+        <record id="action_asset_view_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            
+            <field name="view_id" ref="account_asset.view_account_asset_asset_form"/>
+            <field name="act_window_id" ref="account_asset.action_account_asset_asset_form"/>
+        </record>  -->
+
+</odoo>

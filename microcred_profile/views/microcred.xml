@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    microcred_profile module for odoo, Profile for Microcred
+        #    Copyright (C) 2016 Syleam ([http://www.syleam.fr/])
+        #              Chris Tribbeck [chris.tribbeck@syleam.fr]
+        #
+        #    This file is a part of microcred_profile
+        #
+        #    microcred_profile is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    microcred_profile is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+        <template id="assets_backend" name="microcred_profile assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/microcred_profile/static/src/css/microcred.css"/> 
+                <script type="text/javascript" src="/microcred_profile/static/src/js/userguide.js"></script>
+            </xpath>
+        </template>
+
+        <template id="microcred_profile.login_layout" inherit_id="web.login_layout" name="Microcred Login">
+            <!--
+            <xpath expr="//div[@class='oe_single_form_footer']" position="replace">
+                <div class="oe_single_form_footer">Here you can write your login footer</div>
+            </xpath>
+            -->
+            <xpath expr="//div[@class='container py-5']/div/div/div" position="replace">
+                <div class="oe_single_form_logo text-center">
+                    <img src="/microcred_profile/static/img/microcred.png"
+                        alt="Microcred"
+                        title="Microcred" />
+                </div>
+            </xpath>
+        </template>
+
+</odoo>

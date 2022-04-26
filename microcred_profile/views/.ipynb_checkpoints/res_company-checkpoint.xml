@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    microcred_profile module for odoo, Profile for Microcred
+        #    Copyright (C) 2016 Syleam ([http://www.syleam.fr/])
+        #              Chris Tribbeck [chris.tribbeck@syleam.fr]
+        #
+        #    This file is a part of microcred_profile
+        #
+        #    microcred_profile is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    microcred_profile is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+       <record model="ir.ui.view" id="view_res_company_microcred_tree">
+            <field name="name">res.company.microcred.form</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="priority" eval="90"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Periods">
+                        <group colspan="4" col="2">
+                            <group colspan="2" col="5">
+                                <button string="Fully reopen previous period" icon="fa-angle-double-left" type="object" name="fully_reopen_previous_period"/>
+                                <button string="Partially reopen previous period" icon="fa-angle-left" type="object" name="partially_reopen_previous_period"/>
+                                <button string="Partially close next period" icon="fa-angle-right" type="object" name="partially_close_next_period"/>
+                                <button string="Fully close next period" icon="fa-angle-double-right" type="object" name="fully_close_next_period"/>
+                                <button string="Create 24 monthly periods" icon="fa-calendar-plus-o" type="object" name="create_2_year_periods"/>
+                            </group>
+                            <group colspan="2" col="4">
+                                <field name="period_lock_date" readonly="1" />
+                                <field name="fiscalyear_lock_date" readonly="1" />
+                            </group>
+                            <field name="period_ids" nolabel="1" colspan="2" readonly="1" >
+                                <tree editable="top">
+                                    <field name="name"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                    <field name="state"/>
+                                    <button string="Fully reopen" icon="fa-angle-double-left" states="partially_closed,fully_closed" type="object" name="fully_reopen_period"/>
+                                    <button string="Partially reopen" icon="fa-angle-left" states="fully_closed" type="object" name="partially_reopen_period"/>
+                                    <button string="Partially close" icon="fa-angle-right" states="open" type="object" name="partially_close_period"/>
+                                    <button string="Fully close" icon="fa-angle-double-right" states="partially_closed,open" type="object" name="fully_close_period"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+               
+                
+            </field>
+        </record>
+       <record id="res_company_purchase_triple_validation_view" model="ir.ui.view">
+            <field name="name">res.company.purchase.triple.validation</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='general_info']" position="after">
+                    <page string="Approbation" name="config">
+                     <group>
+                         <field name="default_expensify_product_id" />
+                          <field name="po_lead"/>
+                         <field name="po_double_validation" widget="radio"/>
+                         <field name="po_double_validation_amount" attrs="{'invisible': [('po_double_validation', '=', 'one_step')]}"/>
+
+                        <field name="po_triple_validation_amount" attrs="{'invisible': [('po_double_validation', 'in', ('one_step', 'two_step'))]}"/>
+<!--                         <field name ="security_lead" />  -->
+                    </group>
+                        
+                    </page>  
+                </xpath>
+            </field>
+        </record> 
+
+         <record id="res_company_invoice_triple_validation_view" model="ir.ui.view">
+            <field name="name">res.company.mrp.config</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='favicon']" position="after">
+                  <group>
+                    <field name="invoice_validation_department_amount"/>
+                    <field name="invoice_validation_cost_control_amount"/>
+                    <field name="invoice_validation_head_finance_amount"/>
+                    <field name="distribution_required"/>
+                 <!--    <label for="default_transfer_charge"/>
+                    <div>
+                        <field name="default_transfer_charge" class="oe_inline"/> %
+                    </div> -->
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>

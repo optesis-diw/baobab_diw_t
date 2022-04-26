@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    microcred_profile module for odoo, Profile for Microcred
+        #    Copyright (C) 2017 SYLEAM Info Services ([http://www.syleam.fr/])
+        #              Chris Tribbeck [chris.tribbeck@syleam.fr]
+        #
+        #    This file is a part of microcred_profile
+        #
+        #    microcred_profile is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    microcred_profile is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+        <template id="web_purchaseorder_document_microcred" inherit_id="purchase.report_purchaseorder_document">
+            <xpath expr="//h2[1]" position="replace">
+                <h2 t-if="o.state != 'draft'">Order Confirmation</h2>
+                <field name="h2"/>
+            </xpath>
+            <xpath expr="//div[@t-if='o.partner_ref']" position="replace">
+                <div t-if="o.partner_ref" class="col-xs-3">
+                    <strong>Our Order Reference:</strong>
+                    <p t-field="o.partner_ref"/>
+                </div>
+            </xpath>
+            <xpath expr="//p[@t-field='o.notes']" position="after">
+                <p t-if="o.order_validator_id"> 
+                 Order validated by <span t-field="o.order_validator_id.name"/> 
+                    on <span t-field="o.order_validate_date"/> 
+                   
+                </p>
+               <p t-if="o.budget_validator_id"> 
+                Order budget validation by <span t-field="o.budget_validator_id.name"/> 
+                    on <span t-field="o.budget_validate_date" /> 
+                </p>
+                <p t-if="o.director_validator_id"> 
+                Order management validation by <span t-field="o.director_validator_id.name"/>
+                    
+                    on <span t-field="o.director_validate_date" /> 
+                </p>
+            </xpath>
+        </template>
+        <record id="purchase.action_report_purchase_order" model="ir.actions.report">
+            <field name="attachment_use" eval="False"/>
+            <field name="attachment">(object.name or '').replace('/','')+'.pdf'</field>
+            <field name="flag_printing" eval="True"/>
+        </record> 
+
+</odoo>

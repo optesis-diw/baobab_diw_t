@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+##############################################################################
+#
+#    microcred_profile module for odoo, Profile for Microcred
+#    Copyright (C) 2016 Syleam ([http://www.syleam.fr/])
+#              Chris Tribbeck [chris.tribbeck@syleam.fr]
+#
+#    This file is a part of microcred_profile
+#
+#    microcred_profile is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    microcred_profile is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see [http://www.gnu.org/licenses/].
+#
+##############################################################################
+-->
+
+<templates>
+    <t t-extend="ViewManagerAction">
+        <t t-jquery="select.oe_debug_view" t-operation="replace">
+            <select t-if="widget.session.uid === 1 and widget.session.debug" class="oe_debug_view"/>
+        </t>
+    </t>
+    <t t-extend="UserMenu.about">
+        <t t-jquery="a.oe_activate_debug_mode" t-operation="replace">
+            <div class="row" t-if="db_info.warning='admin'">
+                <a class="oe_activate_debug_mode oe_right label label-primary" href="?debug" >Activate the developer mode</a> <t t-esc="db_info.warning"/>
+            </div>
+        </t>
+    </t>
+</templates>
+

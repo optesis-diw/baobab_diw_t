@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    microcred_profile module for odoo, Profile for Microcred
+        #    Copyright (C) 2016 SYLEAM Info Services ([http://www.syleam.fr/])
+        #              Chris Tribbeck [chris.tribbeck@syleam.fr]
+        #
+        #    This file is a part of microcred_profile
+        #
+        #    microcred_profile is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    microcred_profile is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+        <record model="ir.ui.view" id="view_wizard_mass_subscription_form">
+            <field name="name">wizard.mass.subscription.form</field>
+            <field name="model">wizard.mass.subscription</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Export Budgets">
+                    <group colspan="4">
+                        <separator string="Partners" colspan="4"/>
+                        <field name="partner_ids" widget="many2many" nolabel="1" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="no_invoices" invisible="1" />
+                        <field name="no_purchases" invisible="1" />
+                        <field name="no_elements" invisible="1" />
+                    </group>
+                    <group colspan="4" attrs="{'invisible': [('no_invoices', '=', True)]}">
+                        <separator string="Invoices" colspan="4"/>
+                        <field name="move_ids" widget="many2many" nolabel="1" readonly="1" />
+                    </group>
+                    <group colspan="4" attrs="{'invisible': [('no_purchases', '=', True)]}">
+                        <separator string="Purchase orders" colspan="4"/>
+                        <field name="purchase_ids" widget="many2many" nolabel="1" readonly="1" />
+                    </group>
+                    <group colspan="4" attrs="{'invisible': [('no_elements', '=', True)]}">
+                        <separator string="Budget elements" colspan="4"/>
+                        <field name="element_ids" widget="many2many" nolabel="1" readonly="1" />
+                    </group>
+                    <footer>
+                        <button name="mass_subscribe" string="Mass subscribe" colspan="1" type="object" class="oe_highlight" attrs="{'invisible': [('is_ok', '=', False)]}"/>
+                        <button special="cancel" string="Cancel" />
+                        <field name="is_ok" invisible="1" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+            <!--migration by YOWIT CTD -->
+ <record id="action_mass_subscribe_invoices" model="ir.actions.act_window">
+            <field name="name">Mass subscribe</field>
+            <field name="res_model">wizard.mass.subscription</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_view_types">form,tree</field>
+
+        </record>
+
+
+    <record id="action_mass_subscribe_purchases" model="ir.actions.act_window">
+            <field name="name">Mass subscribe</field>
+            <field name="res_model">wizard.mass.subscription</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="model_purchase_order"/>
+            <field name="binding_view_types">form,tree</field>
+    </record>
+
+
+        <record id="action_mass_subscribe_budget_elements" model="ir.actions.act_window">
+            <field name="name">Mass subscribe</field>
+            <field name="res_model">wizard.mass.subscription</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="model_budget_element"/>
+            <field name="binding_view_types">form,tree</field>
+    </record>
+
+
+</odoo>

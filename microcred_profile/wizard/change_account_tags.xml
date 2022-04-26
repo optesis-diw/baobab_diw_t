@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    microcred_profile module for odoo, Profile for Microcred
+        #    Copyright (C) 2016 SYLEAM Info Services ([http://www.syleam.fr])
+        #              Sebastien LANGE [sebastien.lange@syleam.fr]
+        #
+        #    This file is a part of microcred_profile
+        #
+        #    microcred_profile is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    microcred_profile is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+        <record model="ir.ui.view" id="view_wizard_change_account_tags_form">
+            <field name="name">wizard.change.account.tags.form</field>
+            <field name="model">wizard.change.account.tags</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Change Tags">
+                    <group colspan="4" col="2">
+                        <field name="move_line_id" invisible="1"/>
+                        <field name="analytic_line_id" invisible="1"/>
+                        <field name="line_ids" nolabel="1" colspan="2">
+                            <tree string="Lines" editable="bottom" create="false" delete="false" default_order="number">
+                                <field name="axis_id"/>
+                                <field name="tag_ids" attrs="{'required': [('application','=', 'required')]}" widget="many2many_tags"
+                                  domain="[('axis_id', '=', axis_id)]" />
+
+                                <field name="application" invisible="1" />
+                                <field name="error"/>
+                                 <field name="in_error" invisible="1" />
+                                <field name="number" invisible="1" />
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button string="Validate" type="object" name="validate" class="oe_highlight" attrs="{'invisible': [('all_ok', '=', False)]}"/>
+                        <button string="Cancel" special="cancel"/>
+                        <field name="all_ok" invisible="1" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_change_account_tags" model="ir.actions.act_window">
+            <field name="name">Change Tags</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.change.account.tags</field>
+            <field name="view_mode">form</field>
+            <!--<field name="view_mode">form</field>-->
+            <field name="context">{}</field>
+            <field name="domain">[]</field>
+            <field name="target">new</field>
+        </record>
+
+
+</odoo>

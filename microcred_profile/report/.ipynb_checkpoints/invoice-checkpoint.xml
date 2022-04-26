@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    microcred_profile module for odoo, Profile for Microcred
+        #    Copyright (C) 2016 SYLEAM Info Services ([http://www.Syleam.fr/])
+        #              Yannis Pou-Vich [yannis.pouvich@syleam.fr]
+        #
+        #    This file is a part of microcred_profile
+        #
+        #    microcred_profile is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    microcred_profile is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+        <template id="microcred_profile_invoice_minimal_layout" inherit_id="web.minimal_layout">
+            <xpath expr="//head" position="inside">
+                <link href="/microcred_profile/static/src/css/invoice.css" rel="stylesheet" />
+            </xpath>
+        </template>
+
+        <template id="microcred_profile_invoice_layout" inherit_id="web.web_layout">
+            <xpath expr="//head" position="inside">
+                <link href="/microcred_profile/static/src/css/invoice.css" rel="stylesheet" />
+            </xpath>
+        </template>
+
+        <template id="microcred_profile_invoice_document" inherit_id="account.web_invoice_document">
+            <xpath expr="//div[@t-if='o.name']" position="attributes">
+                <attribute name="class">col-xs-12</attribute>
+            </xpath>
+            <xpath expr="//div[@t-if='o.invoice_date']" position="replace">
+                <div class="col-xs-12" t-if="o.invoice_date" name="invoice_date">
+                    <strong><span t-field="o.company_id.city" />, <span t-field="o.invoice_date" t-field-options='{"format": "d MMMM yyyy"}' /></strong>
+                </div>
+            </xpath>
+
+            <xpath expr="//table[1]" position="attributes">
+                <attribute name="class">table table-condensed tblInvoice</attribute>
+            </xpath>
+            <xpath expr="//table[1]//th[2]" position="replace" />
+            <xpath expr="//table[1]//th[2]" position="replace" />
+            <xpath expr="//table[1]//th[2]" position="replace" />
+            <xpath expr="//table[1]//th[2]" position="replace" />
+            <xpath expr="//table[1]//td[2]" position="replace" />
+            <xpath expr="//table[1]//td[2]" position="replace" />
+            <xpath expr="//table[1]//td[2]" position="replace" />
+            <xpath expr="//table[1]//td[2]" position="replace" />
+
+            <xpath expr="//table[@class='table table-condensed']/.." position="attributes">
+                <attribute name="class">col-xs-12</attribute>
+            </xpath>
+            <xpath expr="//table[@class='table table-condensed']//tr[1]" position="replace" />
+
+            <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="after">
+                <div class="row">
+                    <div class="col-xs-12" name="non-payment">
+                        <span class="h6">The non payment of this invoice within 30 days after receipt will result in a payment of interest for late</span>
+                    </div>
+                </div>
+                <div t-if="o.company_id.partner_id.bank_ids" class="row divTblBank" name="bank_details">
+                    <div class="col-xs-12 text-center">
+                        <t t-set="bank" t-value="o.company_id.partner_id.bank_ids[0]" />
+                        <div><span>The amount must be transferred to the following account</span></div>
+                        <div><strong><span t-field="bank.bank_id.name" /></strong></div>
+                        <table class="col-xs-8 col-xs-offset-2 tblBank">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Bank Code</th>
+                                    <th class="text-center">Branch Code</th>
+                                    <th class="text-center">Account</th>
+                                    <th class="text-center">Key Nb</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span t-esc="bank.acc_number[4:9]" /></td>
+                                    <td><span t-esc="bank.acc_number[9:14]" /></td>
+                                    <td><span t-esc="bank.acc_number[14:25]" /></td>
+                                    <td><span t-esc="bank.acc_number[25:27]" /></td>
+                                </tr>
+                                <tr>
+                                    <td>IBAN</td>
+                                    <td colspan="3"><span t-field="bank.acc_number" /></td>
+                                </tr>
+                                <tr>
+                                    <td>SWIFT code</td>
+                                    <td colspan="3"><span t-field="bank.bank_id.bic" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+        <template id="microcred_profile_payment_authorisation" inherit_id="microcred_profile_invoice_document" primary="True">
+            <xpath expr="//h2" position="replace">
+                <h2>
+                    <span t-if="o.type == 'out_invoice'">Invoice</span>
+                    <span t-if="o.type == 'out_refund'">Refund</span>
+                    <span t-if="o.type == 'in_refund'">Vendor Refund</span>
+                    <span t-if="o.type == 'in_invoice'">Payment authorisation</span>
+                    <span t-field="o.number"/>
+                </h2>
+            </xpath>
+            <xpath expr="//div[@name='bank_details']" position="replace"/>
+            <xpath expr="//div[@name='invoice_date']" position="replace"/>
+            <xpath expr="//div[@t-if='o.reference']" position="after">
+                <div class="col-xs-2" t-if="o.invoice_date">
+                    <strong>Invoice Date:</strong>
+                    <p t-field="o.invoice_date" t-field-options='{"format": "d MMMM yyyy"}'/>
+                </div>
+            </xpath>
+            <xpath expr="//div[@name='non-payment']" position="replace">
+                <div class="col-xs-12" name="invoice-authorisation" t-if="o.invoice_validator_id">
+                    Invoice validated by <span t-field="o.invoice_validator_id.name"/> on <span t-field="o.invoice_validate_date" t-field-options='{"format": "d MMMM yyyy"}'/>
+                </div>
+                <div class="col-xs-12" name="payment-authorisation" t-if="o.payment_validator_id">
+                    Payment authorisation validated by <span t-field="o.payment_validator_id.name"/> on <span t-field="o.payment_validate_date" t-field-options='{"format": "d MMMM yyyy"}'/>
+                </div>
+            </xpath>
+            <xpath expr="//div[@class='row']/div[@class='col-xs-5 col-xs-offset-7']" position="before">
+                <div class="col-xs-5">
+                    <address t-field="o.company_id.partner_id"
+                        t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}' />
+                </div>
+            </xpath>
+            <xpath expr="//div[@class='row']/div[@class='col-xs-5 col-xs-offset-7']" position="attributes">
+                <attribute name="class">col-xs-5 col-xs-offset-2</attribute>
+            </xpath>
+            <xpath expr="//table[1]//th[1]" position="after">
+                <th>Budget Line</th>
+            </xpath>
+            <xpath expr="//table[1]//td[1]" position="after">
+                <td><span t-field="l.budget_element_id.display_name"/></td>
+            </xpath>
+            <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="replace"/>
+        </template>
+        <template id="web_payment_authorisation">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="microcred_profile.microcred_profile_payment_authorisation" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+        <web
+            id="account_payment_authorisation"
+            model="account.move"
+            string="Payment authorisations"
+            web_type="qweb-pdf"
+            name="microcred_profile.web_payment_authorisation"
+            file="microcred_profile.web_payment_authorisation"
+            attachment_use="True"
+            attachment="(object.state in ('open','to pay','paid')) and ('PAYAUTH'+(object.number or '').replace('/','')+'.pdf')"
+        />
+        <record id="account_payment_authorisation" model="ir.actions.report">
+            <field name="flag_printing" eval="True"/>
+        </record>
+        <record id="account.account_invoices" model="ir.actions.report">
+            <field name="attachment">(object.state in ('open','to_pay','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')</field>
+            <field name="flag_printing" eval="True"/>
+        </record>
+
+</odoo>

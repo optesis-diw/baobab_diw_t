@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<odoo>
+    
+    <record model="ir.ui.view" id="view_account_journal_inherit_custom_probc">
+        <field name="name">account.journal.inherit.form.custom</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="////form/sheet/notebook/page[last()]" position="after">
+                <page string="Approvals Settings">
+                    <group>
+                        <field name="custom_approval_type"  widget="radio"/>
+                        <field name="custom_second_approver_ids" widget="many2many_tags" attrs="{'required': [('custom_approval_type', 'in', ('second_level_approval', 'both'))] , 'invisible': [('custom_approval_type', 'not in', ('second_level_approval', 'both'))]}"/>
+                        <field name="custom_third_approver_ids" widget="many2many_tags" attrs="{'required': [('custom_approval_type', '=', 'both')],'invisible': [('custom_approval_type', '!=', 'both')]}"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    
+</odoo>
+
+

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custom_account_move_refuse_wizard,access.custom.account.move.refuse.wizard,model_custom_account_move_refuse_wizard,account.group_account_invoice,1,1,1,0
+access_custom_account_move_second_approval_wizard,access.custom.account.move.second.approval.wizard,model_custom_account_move_second_approval_wizard,account.group_account_invoice,1,1,1,0
+access_custom_account_move_third_approval_wizard,access.custom.account.move.third.approval.wizard,model_custom_account_move_third_approval_wizard,account.group_account_invoice,1,1,1,0

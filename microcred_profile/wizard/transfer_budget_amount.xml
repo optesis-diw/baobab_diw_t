@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        ##############################################################################
+        #
+        #    microcred_profile module for odoo, Profile for Microcred
+        #    Copyright (C) 2017 SYLEAM Info Services ([http://www.syleam.fr/])
+        #              Chris Tribbeck [chris.tribbeck@syleam.fr]
+        #
+        #    This file is a part of microcred_profile
+        #
+        #    microcred_profile is free software: you can redistribute it and/or modify
+        #    it under the terms of the GNU Affero General Public License as published by
+        #    the Free Software Foundation, either version 3 of the License, or
+        #    (at your option) any later version.
+        #
+        #    microcred_profile is distributed in the hope that it will be useful,
+        #    but WITHOUT ANY WARRANTY; without even the implied warranty of
+        #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        #    GNU Affero General Public License for more details.
+        #
+        #    You should have received a copy of the GNU Affero General Public License
+        #    along with this program.  If not, see [http://www.gnu.org/licenses/].
+        #
+        ##############################################################################
+
+         <record model="ir.ui.view" id="view_wizard_transfer_budget_amount_form">
+            <field name="name">wizard.transfer.budget.amount.form</field>
+            <field name="model">wizard.transfer.budget.amount</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Modify Budget Element">
+                    <group col="2">
+                        <group colspan="2">
+                            <field name="transfer_type"/>
+                        </group>
+                          <group col="2">
+                            <separator string="Source" colspan="2"/>
+                            <field name="budget_element_src_id" string="Source"/>
+                         <!-- <label string="&#160;" colspan="2" attrs="{'invisible': [('transfer_type','in', ('new_sibling', 'existing_sibling'))]}"/>
+                            <label string="&#160;" colspan="2" attrs="{'invisible': [('transfer_type','in', ('new_sibling', 'existing_sibling', 'new_line', 'new_line_and_detail'))]}"/>
+                            <label string="&#160;" colspan="2" attrs="{'invisible': ['|', ('different_company','=', False), ('transfer_type','in', ('new_sibling', 'existing_sibling'))]}"/> -->
+                            <field name="amount_src" widget="monetary" options="{'currency_field': 'currency_src_id'}"/>
+                            <field name="amount_available" widget="monetary" options="{'currency_field': 'currency_src_id'}"/>
+                            <field name="currency_src_id" invisible="1" />
+                            <field name="company_src_id" invisible="1" />
+                        </group>
+                        <group col="2">
+                            <separator string="Target" colspan="2"/>
+                            <!-- <label string="&#160;" colspan="2" attrs="{'invisible': [('transfer_type','!=', 'new_sibling')]}"/> -->
+                            <field name="company_dst_id" string="Company" attrs="{
+                                'invisible': [('transfer_type','in', ('new_sibling', 'existing_sibling'))],
+                                'required': [('transfer_type','not in', ('new_sibling', 'existing_sibling'))]}"/>
+                            <field name="main_budget_dst_id" string="Budget" attrs="{
+                                'invisible': [('transfer_type','in', ('new_sibling', 'existing_sibling'))],
+                                'required': [('transfer_type','not in', ('new_sibling', 'existing_sibling'))]}"/>
+                            <field name="budget_element_dst_id" string="Element" attrs="{
+                                'invisible': [('transfer_type','in', ('new_sibling', 'new_line', 'new_line_and_detail'))],
+                                'required': [('transfer_type','not in', ('new_sibling', 'new_line', 'new_line_and_detail'))]}"/>
+                            <label for="transfer_charge" attrs="{'invisible': ['|', ('different_company','=', False), ('transfer_type','in', ('new_sibling', 'existing_sibling'))]}"/>
+                              <div attrs="{'invisible': ['|', ('different_company','=', False), ('transfer_type','in', ('new_sibling', 'existing_sibling'))]}">
+                                <field name="transfer_charge" class="oe_inline"/>
+                              </div>
+                            <field name="amount_dst" widget="monetary" options="{'currency_field': 'currency_dst_id'}"/>
+                            <field name="currency_dst_id" invisible="1" />
+                            <field name="different_company" invisible="1" />
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Validate" type="object" name="validate" class="oe_highlight" attrs="{'invisible': [('can_transfer','=', False)]}"/>
+                        <button string="Cancel" special="cancel"/>
+                        <field name="can_transfer" invisible="1" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_transfer_budget_amount" model="ir.actions.act_window">
+            <field name="name">transfer.budget.amount</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.transfer.budget.amount</field>
+            <field name="view_mode">form</field>
+            <!--<field name="view_mode">form</field>-->
+            <field name="context">{}</field>
+            <field name="domain">[]</field>
+            <field name="target">new</field>
+        </record>
+
+
+</odoo>
